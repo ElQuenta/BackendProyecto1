@@ -1,0 +1,28 @@
+# Dependencias y compilado
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Variables de entorno (secretos). El ejemplo SI se versiona
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Configuracion de herramientas de IA (llaves y rutas personales)
+.mcp.json
+.codex/
+.claude/
+
+# Material del docente: coleccion de Postman con tests (solo la Simple se comparte)
+postman/proyecto1-completa.postman_collection.json
+
+# Editores y sistema operativo
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
