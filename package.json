@@ -19,7 +19,9 @@
     "db:down": "docker compose down",
     "db:logs": "docker compose logs -f mongo",
     "db:export": "node scripts/db-export.js",
-    "db:import": "node scripts/db-import.js"
+    "db:import": "node scripts/db-import.js",
+    "db:seed": "node scripts/db-seed.js",
+    "docs:endpoints": "node scripts/list-endpoints.js"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.11",
