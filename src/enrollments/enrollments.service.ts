@@ -61,6 +61,7 @@ export class EnrollmentsService {
       throw new BadRequestException('Solo se puede matricular en un periodo abierto');
     }
     const subject = await this.subjectsService.findOne(String(group.subject));
+    if (!subject.active) throw new BadRequestException('La materia esta inactiva');
 
     const cancelled = await this.assertNotDuplicated(student.id, group, subject);
     await this.assertPrerequisites(student.id, subject);
@@ -76,7 +77,7 @@ export class EnrollmentsService {
       { model: 'Enrollment', id: created._id },
     );
     // Verifica que la matricula haya quedado confirmada
-    if (created.status === EnrollmentStatus.Active) {
+    if (created.status !== EnrollmentStatus.Active) {
       throw new BadRequestException('No se pudo confirmar la matricula');
     }
     return created;
@@ -95,8 +96,17 @@ export class EnrollmentsService {
     const session = await this.connection.startSession();
     try {
       await session.withTransaction(async () => {
-        enrollment.status = EnrollmentStatus.Cancelled;
-        await enrollment.save({ session });
+        const cancelled = await this.model.findOneAndUpdate(
+          { _id: enrollment._id, status: EnrollmentStatus.Active },
+          { $set: { status: EnrollmentStatus.Cancelled } },
+          { session, new: true },
+        );
+        if (!cancelled) throw new ConflictException('La matricula ya no esta activa');
+        await this.groupModel.updateOne(
+          { _id: enrollment.group, enrolled: { $gt: 0 } },
+          { $inc: { enrolled: -1 } },
+          { session },
+        );
       });
     } finally {
       await session.endSession();
@@ -148,7 +158,7 @@ export class EnrollmentsService {
   private async resolveStudent(requested: string | undefined, user: AuthUser) {
     if (user.role === Role.Estudiante) {
       const own = await this.studentsService.findByUserId(user.id);
-      if (requested && requested !== own.id) {
+      if (requested && requested.toLowerCase() !== own.id) {
         throw new ForbiddenException('Un estudiante solo puede matricularse a si mismo');
       }
       return own;

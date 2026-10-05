@@ -1,0 +1,1277 @@
+[
+  {
+    "method": "GET",
+    "route": "/api/v1/groups/:id/roster",
+    "handler": "roster",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Lista de estudiantes matriculados en un grupo"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/groups/:id/grade-sheet",
+    "handler": "gradeSheet",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Planilla de notas del grupo: evaluaciones x estudiantes, con promedio parcial"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/groups/:id/finalize",
+    "handler": "finalizeGroup",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Finaliza en bloque las matriculas activas del grupo (calcula nota final y aprueba/reprueba)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/me/schedule",
+    "handler": "mySchedule",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mi horario semanal en un periodo (por defecto el abierto)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/me/available-groups",
+    "handler": "availableForMe",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Grupos del periodo abierto que puedo matricular (cupo, prerrequisitos y materia pendiente)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/me/progress",
+    "handler": "myProgress",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mi malla curricular: que aprobe, que cursa y que puedo matricular"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/:id/progress",
+    "handler": "studentProgress",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Malla curricular y avance de un estudiante"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/programs/:id/curriculum",
+    "handler": "curriculum",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Malla curricular de un programa: materias por semestre con prerrequisitos"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/me/history",
+    "handler": "myHistory",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mi historial academico: materias por periodo, promedio y avance de la carrera"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/:id/schedule",
+    "handler": "studentSchedule",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Horario semanal de un estudiante"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/:id/history",
+    "handler": "studentHistory",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Historial academico de un estudiante"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/teachers/me/schedule",
+    "handler": "myTeacherSchedule",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mi horario de clases en un periodo (por defecto el abierto)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/teachers/:id/schedule",
+    "handler": "teacherSchedule",
+    "source": "academic/academic.controller.ts",
+    "tag": "academics",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Horario de clases de un docente"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/auth/login",
+    "handler": "login",
+    "source": "auth/auth.controller.ts",
+    "tag": "auth",
+    "roles": [],
+    "public": true,
+    "status": 200,
+    "summary": "Iniciar sesion: devuelve el token JWT"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/auth/me",
+    "handler": "me",
+    "source": "auth/auth.controller.ts",
+    "tag": "auth",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Datos de la sesion actual"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/auth/change-password",
+    "handler": "changePassword",
+    "source": "auth/auth.controller.ts",
+    "tag": "auth",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Cambiar mi contrasena (devuelve un token nuevo)"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/classrooms",
+    "handler": "create",
+    "source": "classrooms/classrooms.controller.ts",
+    "tag": "classrooms",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear un salon"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/classrooms",
+    "handler": "findAll",
+    "source": "classrooms/classrooms.controller.ts",
+    "tag": "classrooms",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Listar salones"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/classrooms/:id",
+    "handler": "findOne",
+    "source": "classrooms/classrooms.controller.ts",
+    "tag": "classrooms",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Ver un salon por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/classrooms/:id",
+    "handler": "update",
+    "source": "classrooms/classrooms.controller.ts",
+    "tag": "classrooms",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar un salon"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/groups/:id",
+    "handler": "group",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina un grupo sin matriculas ni evaluaciones"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/evaluations/:id",
+    "handler": "evaluation",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina una evaluacion sin notas registradas"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/grades/:id",
+    "handler": "grade",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina una nota puesta por error (matricula activa)"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/notifications/:id",
+    "handler": "notification",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina una de mis notificaciones"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/classrooms/:id",
+    "handler": "classroom",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina un salon que no este en ningun horario"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/faculties/:id",
+    "handler": "faculty",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina una facultad sin programas ni docentes"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/programs/:id",
+    "handler": "program",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina un programa sin materias ni estudiantes"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/subjects/:id",
+    "handler": "subject",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina una materia sin grupos, matriculas ni dependientes"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/periods/:id",
+    "handler": "period",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina un periodo planificado sin grupos"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/students/:id",
+    "handler": "student",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina un estudiante sin matriculas"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/teachers/:id",
+    "handler": "teacher",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina un docente sin grupos"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/users/:id",
+    "handler": "user",
+    "source": "deletions/deletions.controller.ts",
+    "tag": "deletions21312",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Elimina un usuario sin perfil de estudiante/docente"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/enrollments",
+    "handler": "enroll",
+    "source": "enrollments/enrollments.controller.ts",
+    "tag": "enrollments",
+    "roles": [
+      "admin",
+      "estudiante"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Matricular en un grupo (valida cupo, prerrequisitos, cruces de horario y creditos)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/enrollments",
+    "handler": "findAll",
+    "source": "enrollments/enrollments.controller.ts",
+    "tag": "enrollments",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Listar matriculas"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/enrollments/mine",
+    "handler": "mine",
+    "source": "enrollments/enrollments.controller.ts",
+    "tag": "enrollments",
+    "roles": [
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mis matriculas"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/enrollments/:id",
+    "handler": "findOne",
+    "source": "enrollments/enrollments.controller.ts",
+    "tag": "enrollments",
+    "roles": [
+      "admin",
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Ver una matricula por ID"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/enrollments/:id/cancel",
+    "handler": "cancel",
+    "source": "enrollments/enrollments.controller.ts",
+    "tag": "enrollments",
+    "roles": [
+      "admin",
+      "estudiante"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Cancelar una matricula activa (libera el cupo)"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/evaluations",
+    "handler": "create",
+    "source": "evaluations/evaluations.controller.ts",
+    "tag": "evaluations",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear una evaluacion"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/evaluations",
+    "handler": "findAll",
+    "source": "evaluations/evaluations.controller.ts",
+    "tag": "evaluations",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Listar evaluaciones"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/evaluations/:id",
+    "handler": "findOne",
+    "source": "evaluations/evaluations.controller.ts",
+    "tag": "evaluations",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Ver una evaluacion por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/evaluations/:id",
+    "handler": "update",
+    "source": "evaluations/evaluations.controller.ts",
+    "tag": "evaluations",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar una evaluacion"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/faculties",
+    "handler": "create",
+    "source": "faculties/faculties.controller.ts",
+    "tag": "faculties",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear una facultad"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/faculties",
+    "handler": "findAll",
+    "source": "faculties/faculties.controller.ts",
+    "tag": "faculties",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Listar facultades"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/faculties/:id",
+    "handler": "findOne",
+    "source": "faculties/faculties.controller.ts",
+    "tag": "faculties",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Ver una facultad por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/faculties/:id",
+    "handler": "update",
+    "source": "faculties/faculties.controller.ts",
+    "tag": "faculties",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar una facultad"
+  },
+  {
+    "method": "PUT",
+    "route": "/api/v1/grades",
+    "handler": "upsert",
+    "source": "grades/grades.controller.ts",
+    "tag": "grades",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Registrar o corregir una nota (idempotente)"
+  },
+  {
+    "method": "PUT",
+    "route": "/api/v1/grades/bulk",
+    "handler": "bulk",
+    "source": "grades/grades.controller.ts",
+    "tag": "grades",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Registrar varias notas a la vez (planilla); informa las que fallaron"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/grades",
+    "handler": "findAll",
+    "source": "grades/grades.controller.ts",
+    "tag": "grades",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Consultar notas de una matricula o de una evaluacion"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/grades/mine",
+    "handler": "mine",
+    "source": "grades/grades.controller.ts",
+    "tag": "grades",
+    "roles": [
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mis notas"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/grades/finalize/:enrollmentId",
+    "handler": "finalize",
+    "source": "grades/grades.controller.ts",
+    "tag": "grades",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Calcular la nota final de una matricula y marcarla aprobada/reprobada"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/groups",
+    "handler": "create",
+    "source": "groups/groups.controller.ts",
+    "tag": "groups",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear un grupo"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/groups",
+    "handler": "findAll",
+    "source": "groups/groups.controller.ts",
+    "tag": "groups",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Listar grupos (filtros: period, subject, teacher, day, available, active)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/groups/mine",
+    "handler": "mine",
+    "source": "groups/groups.controller.ts",
+    "tag": "groups",
+    "roles": [
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mis grupos (docente)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/groups/:id",
+    "handler": "findOne",
+    "source": "groups/groups.controller.ts",
+    "tag": "groups",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Ver un grupo por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/groups/:id",
+    "handler": "update",
+    "source": "groups/groups.controller.ts",
+    "tag": "groups",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar un grupo"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/health",
+    "handler": "getHealth",
+    "source": "health/health.controller.ts",
+    "tag": "health",
+    "roles": [],
+    "public": true,
+    "status": 200,
+    "summary": "Estado de la API y de la conexion con MongoDB"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/notifications",
+    "handler": "create",
+    "source": "notifications/notifications.controller.ts",
+    "tag": "notifications",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Enviar un aviso a un usuario"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/notifications/mine",
+    "handler": "mine",
+    "source": "notifications/notifications.controller.ts",
+    "tag": "notifications",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Mis notificaciones (con contador de no leidas)"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/notifications/read-all",
+    "handler": "readAll",
+    "source": "notifications/notifications.controller.ts",
+    "tag": "notifications",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Marcar todas mis notificaciones como leidas"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/notifications/:id/read",
+    "handler": "read",
+    "source": "notifications/notifications.controller.ts",
+    "tag": "notifications",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Marcar una notificacion como leida"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/periods",
+    "handler": "create",
+    "source": "periods/periods.controller.ts",
+    "tag": "periods",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear un periodo"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/periods",
+    "handler": "findAll",
+    "source": "periods/periods.controller.ts",
+    "tag": "periods",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Listar periodos (filtro: status)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/periods/current",
+    "handler": "current",
+    "source": "periods/periods.controller.ts",
+    "tag": "periods",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Periodo abierto actual"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/periods/:id",
+    "handler": "findOne",
+    "source": "periods/periods.controller.ts",
+    "tag": "periods",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Ver un periodo por ID"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/periods/:id/close-check",
+    "handler": "closeCheck",
+    "source": "periods/periods.controller.ts",
+    "tag": "periods",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Revision previa al cierre: matriculas activas pendientes por grupo"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/periods/:id/close",
+    "handler": "close",
+    "source": "periods/periods.controller.ts",
+    "tag": "periods",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Cierra el periodo (abierto -> cerrado). Es irreversible"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/periods/:id",
+    "handler": "update",
+    "source": "periods/periods.controller.ts",
+    "tag": "periods",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar un periodo"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/programs",
+    "handler": "create",
+    "source": "programs/programs.controller.ts",
+    "tag": "programs",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear un programa"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/programs",
+    "handler": "findAll",
+    "source": "programs/programs.controller.ts",
+    "tag": "programs",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Listar programas (filtros: q, faculty, active)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/programs/:id",
+    "handler": "findOne",
+    "source": "programs/programs.controller.ts",
+    "tag": "programs",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Ver un programa por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/programs/:id",
+    "handler": "update",
+    "source": "programs/programs.controller.ts",
+    "tag": "programs",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar un programa"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/dashboard",
+    "handler": "dashboard",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Tablero general: conteos del sistema y estado del periodo abierto"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/enrollments-by-program",
+    "handler": "enrollmentsByProgram",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Matriculas y estudiantes por programa en un periodo"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/group-occupancy",
+    "handler": "groupOccupancy",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Ocupacion de los grupos (los mas llenos primero)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/subject-performance",
+    "handler": "subjectPerformance",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Aprobacion y promedio por materia (las de menor aprobacion primero)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/top-students",
+    "handler": "topStudents",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mejores promedios del periodo (ponderados por creditos)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/at-risk-students",
+    "handler": "atRiskStudents",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Estudiantes con materias reprobadas en el periodo"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/teacher-load",
+    "handler": "teacherLoad",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Carga docente: grupos, estudiantes y creditos por docente"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/reports/faculty-summary",
+    "handler": "facultySummary",
+    "source": "reports/reports.controller.ts",
+    "tag": "reports",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Programas, docentes y estudiantes por facultad"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/students",
+    "handler": "create",
+    "source": "students/students.controller.ts",
+    "tag": "students",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear un estudiante"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students",
+    "handler": "findAll",
+    "source": "students/students.controller.ts",
+    "tag": "students",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Listar estudiantes (filtros: q, program, active)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/me",
+    "handler": "me",
+    "source": "students/students.controller.ts",
+    "tag": "students",
+    "roles": [
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mi perfil de estudiante"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/students/:id",
+    "handler": "findOne",
+    "source": "students/students.controller.ts",
+    "tag": "students",
+    "roles": [
+      "admin",
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Ver un estudiante por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/students/:id",
+    "handler": "update",
+    "source": "students/students.controller.ts",
+    "tag": "students",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar un estudiante"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/subjects",
+    "handler": "create",
+    "source": "subjects/subjects.controller.ts",
+    "tag": "subjects",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear una materia"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/subjects",
+    "handler": "findAll",
+    "source": "subjects/subjects.controller.ts",
+    "tag": "subjects",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Listar materias (filtros: q, program, semester, active)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/subjects/:id",
+    "handler": "findOne",
+    "source": "subjects/subjects.controller.ts",
+    "tag": "subjects",
+    "roles": [],
+    "public": false,
+    "status": 200,
+    "summary": "Ver una materia por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/subjects/:id",
+    "handler": "update",
+    "source": "subjects/subjects.controller.ts",
+    "tag": "subjects",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar una materia"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/teachers",
+    "handler": "create",
+    "source": "teachers/teachers.controller.ts",
+    "tag": "teachers",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear un docente"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/teachers",
+    "handler": "findAll",
+    "source": "teachers/teachers.controller.ts",
+    "tag": "teachers",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Listar docentes (filtros: q, faculty, active)"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/teachers/me",
+    "handler": "me",
+    "source": "teachers/teachers.controller.ts",
+    "tag": "teachers",
+    "roles": [
+      "docente"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mi perfil de docente"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/teachers/:id",
+    "handler": "findOne",
+    "source": "teachers/teachers.controller.ts",
+    "tag": "teachers",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Ver un docente por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/teachers/:id",
+    "handler": "update",
+    "source": "teachers/teachers.controller.ts",
+    "tag": "teachers",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar un docente"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/users",
+    "handler": "findAll",
+    "source": "users/users.controller.ts",
+    "tag": "users",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Listar usuarios (filtros: role, active, q)"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/users",
+    "handler": "create",
+    "source": "users/users.controller.ts",
+    "tag": "users",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 201,
+    "summary": "Crear un usuario"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/users/me",
+    "handler": "updateMe",
+    "source": "users/users.controller.ts",
+    "tag": "users",
+    "roles": [
+      "admin",
+      "docente",
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar mi nombre"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/users/me",
+    "handler": "me",
+    "source": "users/users.controller.ts",
+    "tag": "users",
+    "roles": [
+      "admin",
+      "docente",
+      "estudiante"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Mi perfil de usuario"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/users/:id",
+    "handler": "findOne",
+    "source": "users/users.controller.ts",
+    "tag": "users",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Ver un usuario por ID"
+  },
+  {
+    "method": "PATCH",
+    "route": "/api/v1/users/:id",
+    "handler": "update",
+    "source": "users/users.controller.ts",
+    "tag": "users",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Editar un usuario"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/users/:id/reset-password",
+    "handler": "resetPassword",
+    "source": "users/users.controller.ts",
+    "tag": "users",
+    "roles": [
+      "admin"
+    ],
+    "public": false,
+    "status": 200,
+    "summary": "Restablecer la contrasena de un usuario"
+  }
+]

@@ -14,7 +14,7 @@ cp .env.example .env   # variables de entorno
 npm install
 npm run db:up          # levanta MongoDB con Docker
 npm run db:import      # carga los datos de prueba (database/*.json)
-npm run start          # API en http://localhost:3000/api
+npm run start          # API en http://localhost:3000/api/v1 (puerto PORT)
 ```
 
 Luego levanta el frontend (`proyectoFrontend1`), que corre en http://localhost:3001.
@@ -23,8 +23,8 @@ Luego levanta el frontend (`proyectoFrontend1`), que corre en http://localhost:3
 
 | Qué | URL |
 |---|---|
-| API | http://localhost:3000/api |
-| Documentación Swagger | http://localhost:3000/api/docs |
+| API | http://localhost:3000/api/v1 |
+| Documentación Swagger | http://localhost:3000/api/doc |
 | Frontend | http://localhost:3001 |
 
 ## Usuarios de prueba
@@ -39,8 +39,21 @@ Todos con la clave `Secret123!`:
 
 ## Documentación y pruebas
 
-- Swagger: http://localhost:3000/api/docs
+- Swagger: http://localhost:3000/api/doc
 - `postman/proyecto1-simple.postman_collection.json`: colección de Postman.
+
+La colección incluye las 100 rutas registradas y seis escenarios negativos, con tres assertions por solicitud. Configure `baseUrl`, `token` e IDs; las contraseñas se proporcionan mediante variables en un entorno local privado. Para CRUD utilice fixtures propios en una base de prueba.
+
+Verificación del backend:
+
+```powershell
+npm test                         # compila y ejecuta regresiones + HTTP en una base temporal
+npm exec --yes --package=newman -- newman --version
+npm run test:postman              # Newman local, lecturas y negativos con fixtures aislados
+npm run docs:endpoints
+```
+
+Las pruebas requieren el MongoDB local de `docker-compose.yml` con replica set `rs0`. Generan una base `proyecto1_review_<id>` por ejecución y limpian sus documentos al finalizar; no cargan los datos de `database/` ni modifican `universidad`. El reporte de hallazgos y pendientes está en `Review.md`.
 
 ## Actividad
 

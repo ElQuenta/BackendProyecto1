@@ -6,6 +6,6 @@ export class ParseObjectIdPipe implements PipeTransform<string, string> {
     if (!/^[a-f\d]{24}$/i.test(value)) {
       throw new BadRequestException('ID invalido');
     }
-    return value;
+    return value.toLowerCase();
   }
 }

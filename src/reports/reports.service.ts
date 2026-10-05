@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, PipelineStage, Types } from 'mongoose';
 import { Classroom, ClassroomDocument } from '../classrooms/schemas/classroom.schema';
@@ -67,7 +67,8 @@ export class ReportsService {
         occupancyPercent: s.capacity > 0 ? Math.round((s.enrolled / s.capacity) * 1000) / 10 : 0,
         enrollmentsByStatus: Object.fromEntries(byStatus.map((x) => [x._id, x.total])),
       };
-    } catch {
+    } catch (error) {
+      if (!(error instanceof NotFoundException)) throw error;
       // Sin periodo abierto: el resto del tablero sigue siendo valido
     }
 

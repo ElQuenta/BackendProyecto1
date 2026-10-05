@@ -120,7 +120,7 @@ export class AcademicService {
           evaluatedWeight += ev.weight;
         }
       }
-      const pending = evaluations.length - own.size;
+      const pending = evaluations.filter((e) => !own.has(String(e._id))).length;
       return {
         enrollment: e._id,
         status: e.status,
@@ -267,7 +267,9 @@ export class AcademicService {
       user: { name: string; email: string };
       program: { _id: Types.ObjectId; code: string; name: string };
     };
+    if (!owner.program) throw new NotFoundException('Programa del estudiante no encontrado');
     const program = await this.programModel.findById(owner.program._id).lean();
+    if (!program) throw new NotFoundException('Programa del estudiante no encontrado');
 
     const enrollments = (await this.enrollmentModel
       .find({ student: owner._id, status: { $ne: EnrollmentStatus.Cancelled } })
@@ -366,6 +368,7 @@ export class AcademicService {
       user: { name: string };
       program: { _id: Types.ObjectId; code: string; name: string };
     };
+    if (!owner.program) throw new NotFoundException('Programa del estudiante no encontrado');
     const subjects = await this.loadCurriculumSubjects(String(owner.program._id));
     const enrollments = await this.enrollmentModel
       .find({ student: owner._id, status: { $ne: EnrollmentStatus.Cancelled } })
@@ -415,6 +418,7 @@ export class AcademicService {
   async availableGroups(userId: string, all: boolean) {
     const student = await this.studentsService.findByUserId(userId);
     const owner = student.toObject() as unknown as { _id: Types.ObjectId; program: { _id: Types.ObjectId } };
+    if (!owner.program) throw new NotFoundException('Programa del estudiante no encontrado');
     const period = await this.periodsService.findCurrent();
 
     const enrollments = await this.enrollmentModel

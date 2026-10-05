@@ -9,6 +9,7 @@ import { GroupsModule } from '../groups/groups.module';
 import { Group, GroupSchema } from '../groups/schemas/group.schema';
 import { Notification, NotificationSchema } from '../notifications/schemas/notification.schema';
 import { Period, PeriodSchema } from '../periods/schemas/period.schema';
+import { PeriodsModule } from '../periods/periods.module';
 import { Program, ProgramSchema } from '../programs/schemas/program.schema';
 import { Student, StudentSchema } from '../students/schemas/student.schema';
 import { Subject, SubjectSchema } from '../subjects/schemas/subject.schema';
@@ -35,6 +36,7 @@ import { DeletionsService } from './deletions.service';
       { name: Teacher.name, schema: TeacherSchema },
     ]),
     GroupsModule,
+    PeriodsModule,
   ],
   controllers: [DeletionsController],
   providers: [DeletionsService],

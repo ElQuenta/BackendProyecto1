@@ -95,7 +95,10 @@ export class GroupsService {
   // El admin gestiona cualquier grupo; un docente solo los que tiene a su cargo
   async assertCanManage(groupId: string, user: AuthUser): Promise<GroupDocument> {
     const group = await this.findRaw(groupId);
-    if (user.role === Role.Estudiante) {
+    if (user.role !== Role.Admin && user.role !== Role.Docente) {
+      throw new ForbiddenException('No tienes permisos para gestionar grupos');
+    }
+    if (user.role === Role.Docente) {
       const teacher = await this.teachersService.findByUserId(user.id);
       if (String(group.teacher) !== teacher.id) throw new ForbiddenException('El grupo no esta a tu cargo');
     }
@@ -119,12 +122,14 @@ export class GroupsService {
 
     const teacherId = dto.teacher ?? String(group.teacher);
     const schedule = dto.schedule ?? (group.schedule as unknown as ScheduleSlotDto[]);
+    const reactivating = dto.active === true && !group.active;
     const newTeacher = dto.teacher && dto.teacher !== String(group.teacher) ? await this.assertTeacherActive(dto.teacher) : null;
-    if (dto.schedule) {
-      this.assertValidSchedule(dto.schedule);
-      await this.classroomsService.assertActive(dto.schedule.map((s) => s.classroom));
+    if (reactivating && !newTeacher) await this.assertTeacherActive(teacherId);
+    if (dto.schedule || reactivating) {
+      this.assertValidSchedule(schedule);
+      await this.classroomsService.assertActive(schedule.map((s) => String(s.classroom)));
     }
-    if (dto.teacher || dto.schedule) {
+    if (dto.teacher || dto.schedule || reactivating) {
       await this.assertNoConflicts(String(group.period), teacherId, schedule, id);
     }
 
@@ -194,10 +199,10 @@ export class GroupsService {
       for (const a of schedule) {
         for (const b of other.schedule as unknown as ScheduleSlotDto[]) {
           if (!overlaps(a, b)) continue;
-          if (String(other.teacher) === teacher) {
+          if (String(other.teacher).toLowerCase() === teacher.toLowerCase()) {
             throw new ConflictException(`El docente ya tiene clase el ${a.day} de ${b.startTime} a ${b.endTime}`);
           }
-          if (String(a.classroom) === String(b.classroom)) {
+          if (String(a.classroom).toLowerCase() === String(b.classroom).toLowerCase()) {
             const code = await this.classroomsService.codeOf(String(a.classroom));
             throw new ConflictException(`El salon ${code} esta ocupado el ${a.day} de ${b.startTime} a ${b.endTime}`);
           }
