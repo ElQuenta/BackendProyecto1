@@ -42,6 +42,19 @@ Todos con la clave `Secret123!`:
 - Swagger: http://localhost:3000/api/doc
 - `postman/proyecto1-simple.postman_collection.json`: colección de Postman.
 
+La colección incluye las 100 rutas registradas y seis escenarios negativos, con tres assertions por solicitud. Configure `baseUrl`, `token` e IDs; las contraseñas se proporcionan mediante variables en un entorno local privado. Para CRUD utilice fixtures propios en una base de prueba.
+
+Verificación del backend:
+
+```powershell
+npm test                         # compila y ejecuta regresiones + HTTP en una base temporal
+npm exec --yes --package=newman -- newman --version
+npm run test:postman              # Newman local, lecturas y negativos con fixtures aislados
+npm run docs:endpoints
+```
+
+Las pruebas requieren el MongoDB local de `docker-compose.yml` con replica set `rs0`. Generan una base `proyecto1_review_<id>` por ejecución y limpian sus documentos al finalizar; no cargan los datos de `database/` ni modifican `universidad`. El reporte de hallazgos y pendientes está en `Review.md`.
+
 ## Actividad
 
 Cada grupo deberá revisar de manera integral el proyecto, incluyendo:
