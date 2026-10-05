@@ -1,0 +1,3159 @@
+{
+  "date": "2026-10-05",
+  "database": "universidad",
+  "transport": "MongoDB MCP 3.0.5 stdio --readOnly",
+  "checks": [
+    {
+      "label": "users_details",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12a38"
+            },
+            "role": "admin",
+            "nameType": "string",
+            "emptyName": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12a90"
+            },
+            "role": "Docente",
+            "nameType": "string",
+            "emptyName": false
+          }
+        ],
+        "queryResultsCount": 2,
+        "appliedLimits": [
+          "config.maxDocumentsPerQuery"
+        ]
+      }
+    },
+    {
+      "label": "subjects_details",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c1299d"
+            },
+            "code": "ODON105",
+            "credits": 0
+          }
+        ],
+        "queryResultsCount": 1,
+        "appliedLimits": [
+          "config.maxDocumentsPerQuery"
+        ]
+      }
+    },
+    {
+      "label": "grades_details",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12df0"
+            },
+            "value": 5.7
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12dfc"
+            },
+            "value": 5.7
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12e1b"
+            },
+            "value": "4,2"
+          }
+        ],
+        "queryResultsCount": 3,
+        "appliedLimits": [
+          "config.maxDocumentsPerQuery"
+        ]
+      }
+    },
+    {
+      "label": "periods_details",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "code": "2026-2",
+            "status": "Abierto"
+          }
+        ],
+        "queryResultsCount": 1,
+        "appliedLimits": [
+          "config.maxDocumentsPerQuery"
+        ]
+      }
+    },
+    {
+      "label": "notifications_details",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12eb7"
+            },
+            "type": "aviso_urgente",
+            "createdAt": {
+              "$date": "2026-08-02T00:00:00.000Z"
+            }
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12ec0"
+            },
+            "type": "matricula_confirmada",
+            "createdAt": "ayer"
+          }
+        ],
+        "queryResultsCount": 2,
+        "appliedLimits": [
+          "config.maxDocumentsPerQuery"
+        ]
+      }
+    },
+    {
+      "label": "groups_details",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c37"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c2d"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c38"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b3a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c11"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c39"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b68"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c17"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c17"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3a"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b62"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "Miércoles",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bef"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3b"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c09"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3c"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b27"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c09"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c09"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3d"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b60"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf8"
+                }
+              },
+              {
+                "day": "viernes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf8"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3e"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b19"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c32"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3f"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b45"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be2"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be2"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c40"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b22"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0d"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0d"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c41"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b58"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd4"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c42"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b63"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c2f"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c43"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b37"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bfa"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c44"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b64"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c17"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c45"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b3d"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0d"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c46"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b65"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bfc"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c47"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b23"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c35"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c48"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b49"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c32"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c49"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b33"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1f"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1f"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c4a"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b40"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0c"
+                }
+              },
+              {
+                "day": "viernes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0c"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c4b"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b54"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf9"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c4c"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b33"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf3"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c4d"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b54"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be7"
+                }
+              },
+              {
+                "day": "viernes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be7"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c4e"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1d"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c15"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c4f"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c12"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c12"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c50"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b6a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf2"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c51"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b69"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c34"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c34"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c52"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b6a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1a"
+                }
+              },
+              {
+                "day": "miercoles",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1a"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c53"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c13"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c54"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b0c"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf2"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf2"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c55"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b34"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c35"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c35"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c56"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b3c"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf5"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf5"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c57"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b33"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bec"
+                }
+              },
+              {
+                "day": "miercoles",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bec"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c58"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b53"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1a"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1a"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c59"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b2d"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be2"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be2"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c5a"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd8"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c5b"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b68"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c32"
+                }
+              },
+              {
+                "day": "miercoles",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c32"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c5c"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b6e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be7"
+                }
+              },
+              {
+                "day": "miercoles",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be7"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c5d"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b46"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be0"
+                }
+              },
+              {
+                "day": "miercoles",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be0"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c5e"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b29"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd5"
+                }
+              },
+              {
+                "day": "miercoles",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd5"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c5f"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b58"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bdc"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c60"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c36"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c61"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b12"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c12"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c12"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c62"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b2a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd6"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd6"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c63"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1b"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c64"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b62"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "09:00",
+                "endTime": "07:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c06"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c06"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c65"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0d"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0d"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c66"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b59"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c30"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c67"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b2e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd3"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c68"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b56"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bec"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c69"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b3f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be0"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c6a"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c2b"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c6b"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b41"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c36"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c6c"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b2b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd7"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c6d"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b38"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0e"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c6e"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b0f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c14"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c14"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c6f"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b48"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd6"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd6"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c70"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b2e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0a"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c71"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b0b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be1"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c72"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b69"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd5"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd5"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c73"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b26"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12beb"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12beb"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c74"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b5c"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be5"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be5"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c75"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b33"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c18"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c18"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c76"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b5b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12beb"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12beb"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c77"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b50"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c09"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c78"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd7"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c79"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b6c"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bfb"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c7a"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b55"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c12"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c12"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c7b"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b44"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bec"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bec"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c7c"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c00"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c00"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c7d"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b5f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c11"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c11"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c7e"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b3c"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be8"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c7f"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b63"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c11"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c80"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd3"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd3"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c81"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b21"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be2"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c82"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c17"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c83"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b17"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c1a"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c84"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b31"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c15"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c85"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b26"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bed"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c86"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4a"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be5"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be5"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c87"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b1e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c32"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c88"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b14"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c32"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c89"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b6b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0d"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c8a"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b47"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd3"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd3"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c8b"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b18"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c18"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c18"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c8c"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b5b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bff"
+                }
+              },
+              {
+                "day": "miercoles",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bff"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c8d"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b51"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c0b"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c8e"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4c"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be3"
+                }
+              },
+              {
+                "day": "jueves",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be3"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c8f"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b0f"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bfe"
+                }
+              },
+              {
+                "day": "martes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bfe"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c90"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b15"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf6"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c91"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b38"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a33"
+            },
+            "schedule": [
+              {
+                "day": "viernes",
+                "startTime": "07:00",
+                "endTime": "09:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf8"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c92"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b5e"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf6"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "18:00",
+                "endTime": "20:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf6"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c93"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b11"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c11"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c94"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b64"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf3"
+                }
+              },
+              {
+                "day": "sabado",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf3"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c95"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b69"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "schedule": [
+              {
+                "day": "martes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd4"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd4"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c96"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b0b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "jueves",
+                "startTime": "14:00",
+                "endTime": "16:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12c24"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c97"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b25"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "lunes",
+                "startTime": "11:00",
+                "endTime": "13:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bd4"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c98"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b3b"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a32"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be8"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c99"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b4d"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "schedule": [
+              {
+                "day": "miercoles",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bef"
+                }
+              },
+              {
+                "day": "viernes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12be1"
+                }
+              }
+            ],
+            "active": true
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c9a"
+            },
+            "teacher": {
+              "$oid": "6abf0b8bfead57fb41c12b60"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a36"
+            },
+            "schedule": [
+              {
+                "day": "sabado",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf5"
+                }
+              },
+              {
+                "day": "lunes",
+                "startTime": "09:00",
+                "endTime": "11:00",
+                "classroom": {
+                  "$oid": "6abf0b8bfead57fb41c12bf5"
+                }
+              }
+            ],
+            "active": true
+          }
+        ],
+        "queryResultsCount": 100,
+        "appliedLimits": [
+          "config.maxDocumentsPerQuery"
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "scheduleChecks": {
+    "groups": 100,
+    "invalid": [
+      {
+        "group": "6abf0b8bfead57fb41c12c3a",
+        "slot": {
+          "day": "Miércoles",
+          "startTime": "09:00",
+          "endTime": "11:00",
+          "classroom": {
+            "$oid": "6abf0b8bfead57fb41c12bef"
+          }
+        }
+      },
+      {
+        "group": "6abf0b8bfead57fb41c12c64",
+        "slot": {
+          "day": "jueves",
+          "startTime": "09:00",
+          "endTime": "07:00",
+          "classroom": {
+            "$oid": "6abf0b8bfead57fb41c12c06"
+          }
+        }
+      }
+    ],
+    "conflicts": []
+  },
+  "metadataSupplement": [
+    {
+      "name": "enrollments",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "group": 1
+          },
+          "name": "group_1",
+          "background": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "student": 1,
+            "subject": 1,
+            "status": 1
+          },
+          "name": "student_1_subject_1_status_1",
+          "background": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "student": 1,
+            "period": 1,
+            "status": 1
+          },
+          "name": "student_1_period_1_status_1",
+          "background": true
+        }
+      ]
+    },
+    {
+      "name": "groups",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "teacher": 1
+          },
+          "name": "teacher_1",
+          "background": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "period": 1
+          },
+          "name": "period_1",
+          "background": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "subject": 1,
+            "period": 1,
+            "number": 1
+          },
+          "name": "subject_1_period_1_number_1",
+          "background": true,
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "grades",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "enrollment": 1
+          },
+          "name": "enrollment_1",
+          "background": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "enrollment": 1,
+            "evaluation": 1
+          },
+          "name": "enrollment_1_evaluation_1",
+          "background": true,
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "programs",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "faculty": 1
+          },
+          "name": "faculty_1",
+          "background": true
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "user": 1
+          },
+          "name": "user_1",
+          "background": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "user": 1,
+            "read": 1,
+            "createdAt": -1
+          },
+          "name": "user_1_read_1_createdAt_-1",
+          "background": true
+        }
+      ]
+    },
+    {
+      "name": "evaluations",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "group": 1
+          },
+          "name": "group_1",
+          "background": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "group": 1,
+            "name": 1
+          },
+          "name": "group_1_name_1",
+          "background": true,
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "faculties",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "code": 1
+          },
+          "name": "code_1",
+          "background": true,
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "campus": 1
+          },
+          "name": "campus_1",
+          "background": true
+        }
+      ]
+    },
+    {
+      "name": "students",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "user": 1
+          },
+          "name": "user_1",
+          "background": true,
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "code": 1
+          },
+          "name": "code_1",
+          "background": true,
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "program": 1
+          },
+          "name": "program_1",
+          "background": true
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "email": 1
+          },
+          "name": "email_1",
+          "background": true,
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "classrooms",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "code": 1
+          },
+          "name": "code_1",
+          "background": true,
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "building": 1
+          },
+          "name": "building_1",
+          "background": true
+        }
+      ]
+    },
+    {
+      "name": "teachers",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "user": 1
+          },
+          "name": "user_1",
+          "background": true,
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "code": 1
+          },
+          "name": "code_1",
+          "background": true,
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "faculty": 1
+          },
+          "name": "faculty_1",
+          "background": true
+        }
+      ]
+    },
+    {
+      "name": "periods",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "code": 1
+          },
+          "name": "code_1",
+          "background": true,
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "subjects",
+      "validator": null,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "code": 1
+          },
+          "name": "code_1",
+          "background": true,
+          "unique": true
+        },
+        {
+          "v": 2,
+          "key": {
+            "program": 1
+          },
+          "name": "program_1",
+          "background": true
+        }
+      ]
+    }
+  ]
+}
