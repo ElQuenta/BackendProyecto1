@@ -1,0 +1,662 @@
+{
+  "date": "2026-10-05",
+  "database": "universidad",
+  "transport": "MongoDB MCP 3.0.5 stdio --readOnly",
+  "checks": [
+    {
+      "label": "collections",
+      "result": {
+        "collections": [
+          {
+            "name": "enrollments"
+          },
+          {
+            "name": "groups"
+          },
+          {
+            "name": "grades"
+          },
+          {
+            "name": "programs"
+          },
+          {
+            "name": "notifications"
+          },
+          {
+            "name": "evaluations"
+          },
+          {
+            "name": "faculties"
+          },
+          {
+            "name": "students"
+          },
+          {
+            "name": "users"
+          },
+          {
+            "name": "classrooms"
+          },
+          {
+            "name": "teachers"
+          },
+          {
+            "name": "periods"
+          },
+          {
+            "name": "subjects"
+          }
+        ],
+        "totalCount": 13
+      }
+    },
+    {
+      "label": "users_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 201
+              }
+            ],
+            "duplicate_email": [],
+            "invalid_name": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12a38"
+                }
+              }
+            ],
+            "invalid_email": [],
+            "invalid_passwordHash": [],
+            "invalid_role": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12a90"
+                }
+              }
+            ],
+            "invalid_active": [],
+            "invalid_passwordChangedAt": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "students_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "reference_user": [],
+            "reference_program": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12b9c"
+                },
+                "reference": {
+                  "$oid": "6ac057b232f78f9b9e14f3c4"
+                }
+              }
+            ],
+            "duplicate_user": [],
+            "duplicate_code": [],
+            "invalid_user": [],
+            "invalid_code": [],
+            "invalid_program": [],
+            "invalid_active": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "teachers_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "reference_user": [],
+            "reference_faculty": [],
+            "duplicate_user": [],
+            "duplicate_code": [],
+            "invalid_user": [],
+            "invalid_code": [],
+            "invalid_faculty": [],
+            "invalid_active": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "faculties_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 10
+              }
+            ],
+            "reference_dean": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12b0a"
+                },
+                "reference": {
+                  "$oid": "6ac057b232f78f9b9e14f3c3"
+                }
+              }
+            ],
+            "duplicate_code": [],
+            "invalid_code": [],
+            "invalid_name": [],
+            "invalid_campus": [],
+            "invalid_dean": [],
+            "invalid_email": [],
+            "invalid_active": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "programs_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 101
+              }
+            ],
+            "reference_faculty": [],
+            "duplicate_code": [
+              {
+                "_id": {
+                  "code": "DERE"
+                },
+                "count": 2,
+                "documents": [
+                  {
+                    "$oid": "6abf0b8bfead57fb41c1292d"
+                  },
+                  {
+                    "$oid": "6ac03d4229a649e6df069ebb"
+                  }
+                ]
+              }
+            ],
+            "invalid_code": [],
+            "invalid_name": [],
+            "invalid_totalCredits": [],
+            "invalid_faculty": [],
+            "invalid_active": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "subjects_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "reference_program": [],
+            "reference_prerequisites": [],
+            "duplicate_code": [],
+            "invalid_code": [],
+            "invalid_name": [],
+            "invalid_credits": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c1299d"
+                }
+              }
+            ],
+            "invalid_program": [],
+            "invalid_semester": [],
+            "invalid_prerequisites": [],
+            "invalid_active": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "groups_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "reference_subject": [],
+            "reference_teacher": [],
+            "reference_period": [],
+            "reference_schedule_classroom": [],
+            "duplicate_subject_period_number": [],
+            "invalid_subject": [],
+            "invalid_teacher": [],
+            "invalid_period": [],
+            "invalid_number": [],
+            "invalid_capacity": [],
+            "invalid_enrolled": [],
+            "invalid_schedule": [],
+            "invalid_active": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "enrollments_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 110
+              }
+            ],
+            "reference_student": [],
+            "reference_group": [],
+            "reference_subject": [],
+            "reference_period": [],
+            "duplicate_student_group": [
+              {
+                "_id": {
+                  "student": {
+                    "$oid": "6abf0b8bfead57fb41c12b9c"
+                  },
+                  "group": {
+                    "$oid": "6abf0b8bfead57fb41c12c3e"
+                  }
+                },
+                "count": 2,
+                "documents": [
+                  {
+                    "$oid": "6abf0b8bfead57fb41c12dfb"
+                  },
+                  {
+                    "$oid": "6ac057b232f78f9b9e14f3c2"
+                  }
+                ]
+              }
+            ],
+            "invalid_student": [],
+            "invalid_group": [],
+            "invalid_subject": [],
+            "invalid_period": [],
+            "invalid_status": [],
+            "invalid_finalGrade": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "evaluations_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "reference_group": [],
+            "duplicate_group_name": [],
+            "invalid_group": [],
+            "invalid_name": [],
+            "invalid_weight": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "grades_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 320
+              }
+            ],
+            "reference_enrollment": [],
+            "reference_evaluation": [],
+            "duplicate_enrollment_evaluation": [],
+            "invalid_enrollment": [],
+            "invalid_evaluation": [],
+            "invalid_value": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12df0"
+                }
+              },
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12dfc"
+                }
+              },
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12e1b"
+                }
+              }
+            ],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "notifications_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "reference_user": [],
+            "invalid_user": [],
+            "invalid_type": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12eb7"
+                }
+              }
+            ],
+            "invalid_title": [],
+            "invalid_message": [],
+            "invalid_read": [],
+            "invalid_readAt": [],
+            "invalid_relatedModel": [],
+            "invalid_relatedId": [],
+            "invalid__id": [],
+            "invalid_createdAt": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12ec0"
+                }
+              }
+            ],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "classrooms_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "duplicate_code": [],
+            "invalid_code": [],
+            "invalid_building": [],
+            "invalid_floor": [],
+            "invalid_capacity": [],
+            "invalid_type": [],
+            "invalid_hasProjector": [],
+            "invalid_active": [],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "periods_integrity",
+      "result": {
+        "documents": [
+          {
+            "total": [
+              {
+                "count": 100
+              }
+            ],
+            "duplicate_code": [],
+            "invalid_code": [],
+            "invalid_startDate": [],
+            "invalid_endDate": [],
+            "invalid_status": [
+              {
+                "_id": {
+                  "$oid": "6abf0b8bfead57fb41c12a35"
+                }
+              }
+            ],
+            "invalid__id": [],
+            "invalid_createdAt": [],
+            "invalid_updatedAt": []
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "seat_counters",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3a"
+            },
+            "capacity": 32,
+            "enrolled": 35,
+            "actual": 9
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3e"
+            },
+            "capacity": 39,
+            "enrolled": 42,
+            "actual": 10
+          }
+        ],
+        "count": 2,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "grade_group_mismatch",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12dfd"
+            },
+            "enrollment": {
+              "$oid": "6abf0b8bfead57fb41c12dfb"
+            },
+            "evaluation": {
+              "$oid": "6abf0b8bfead57fb41c12e11"
+            },
+            "enrollmentGroup": {
+              "$oid": "6abf0b8bfead57fb41c12c3e"
+            },
+            "evaluationGroup": {
+              "$oid": "6abf0b8bfead57fb41c12c73"
+            }
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "copied_group_fields",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12dfb"
+            },
+            "group": {
+              "$oid": "6abf0b8bfead57fb41c12c3e"
+            },
+            "subject": {
+              "$oid": "6abf0b8bfead57fb41c129c0"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            },
+            "expectedSubject": {
+              "$oid": "6abf0b8bfead57fb41c1299d"
+            },
+            "expectedPeriod": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            }
+          },
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12e1a"
+            },
+            "group": {
+              "$oid": "6abf0b8bfead57fb41c12c73"
+            },
+            "subject": {
+              "$oid": "6abf0b8bfead57fb41c129cb"
+            },
+            "period": {
+              "$oid": "6abf0b8bfead57fb41c12a34"
+            },
+            "expectedSubject": {
+              "$oid": "6abf0b8bfead57fb41c129cb"
+            },
+            "expectedPeriod": {
+              "$oid": "6abf0b8bfead57fb41c12a35"
+            }
+          }
+        ],
+        "count": 2,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "final_status",
+      "result": {
+        "documents": [],
+        "count": 0,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "period_dates",
+      "result": {
+        "documents": [],
+        "count": 0,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "open_periods",
+      "result": {
+        "documents": [],
+        "count": 0,
+        "appliedLimits": []
+      }
+    },
+    {
+      "label": "evaluation_weight_totals",
+      "result": {
+        "documents": [
+          {
+            "_id": {
+              "$oid": "6abf0b8bfead57fb41c12c3a"
+            },
+            "weight": 110,
+            "evaluations": 4
+          }
+        ],
+        "count": 1,
+        "appliedLimits": []
+      }
+    }
+  ],
+  "errors": [
+    {
+      "label": "enrollment_indexes",
+      "content": [
+        {
+          "type": "text",
+          "text": "Error running collection-indexes: $listSearchIndexes stage is only allowed on MongoDB Atlas"
+        }
+      ]
+    }
+  ]
+}
