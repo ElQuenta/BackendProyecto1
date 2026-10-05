@@ -94,7 +94,7 @@ export class PeriodsService {
       { $project: { _id: 0, group: '$_id', subject: { code: '$s.code', name: '$s.name' }, number: '$g.number', pending: 1 } },
       { $sort: { 'subject.code': 1, number: 1 } },
     ]);
-    const pendingEnrollments = groups.reduce((sum, g) => sum + g.pending, 0);
+    const pendingEnrollments = await this.enrollmentModel.countDocuments({ period: period._id, status: EnrollmentStatus.Active }).exec();
     return {
       period: { id: period.id, code: period.code, status: period.status },
       canClose: period.status === PeriodStatus.Open && pendingEnrollments === 0,

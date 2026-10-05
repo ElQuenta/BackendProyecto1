@@ -82,8 +82,9 @@ export class SubjectsService {
 
   // Evita ciclos: A requiere B y B requiere A (directa o indirectamente)
   private async assertNoCycle(subjectId: string, prerequisites: string[]): Promise<void> {
+    subjectId = subjectId.toLowerCase();
     const visited = new Set<string>();
-    let frontier = [...prerequisites];
+    let frontier = prerequisites.map((id) => id.toLowerCase());
 
     while (frontier.length > 0) {
       if (frontier.includes(subjectId)) {

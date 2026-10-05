@@ -1,4 +1,4 @@
-import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthUser } from '../auth/decorators/current-user.decorator';
@@ -11,6 +11,7 @@ import { GroupsService } from '../groups/groups.service';
 import { Group, GroupDocument } from '../groups/schemas/group.schema';
 import { Notification, NotificationDocument } from '../notifications/schemas/notification.schema';
 import { Period, PeriodDocument, PeriodStatus } from '../periods/schemas/period.schema';
+import { PeriodsService } from '../periods/periods.service';
 import { Program, ProgramDocument } from '../programs/schemas/program.schema';
 import { Student, StudentDocument } from '../students/schemas/student.schema';
 import { Subject, SubjectDocument } from '../subjects/schemas/subject.schema';
@@ -42,6 +43,7 @@ export class DeletionsService {
     @InjectModel(Student.name) private readonly studentModel: Model<StudentDocument>,
     @InjectModel(Teacher.name) private readonly teacherModel: Model<TeacherDocument>,
     private readonly groupsService: GroupsService,
+    private readonly periodsService: PeriodsService,
   ) {}
 
   async removeGroup(id: string): Promise<Deleted> {
@@ -57,7 +59,11 @@ export class DeletionsService {
   // El docente solo borra evaluaciones de sus grupos
   async removeEvaluation(id: string, user: AuthUser): Promise<Deleted> {
     const evaluation = await this.mustExist<EvaluationDocument>(this.evaluationModel, id, 'Evaluacion');
-    await this.groupsService.assertCanManage(String(evaluation.group), user);
+    const group = await this.groupsService.assertCanManage(String(evaluation.group), user);
+    const period = await this.periodsService.findOne(String(group.period));
+    if (period.status === PeriodStatus.Closed) {
+      throw new BadRequestException('El periodo esta cerrado: no se puede modificar el plan de evaluacion');
+    }
     await this.assertUnused('la evaluacion', [[this.gradeModel.countDocuments({ evaluation: id }), 'notas registradas']]);
     await this.evaluationModel.deleteOne({ _id: id });
     return this.done('evaluations', id);

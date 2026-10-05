@@ -1,0 +1,313 @@
+{
+  "runner": "Jest + HTTP fetch, isolated MongoDB fixtures",
+  "results": [
+    {
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/faculties",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/programs",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/users",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/users",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/teachers",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/students",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/subjects",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/periods",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/periods/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/classrooms",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/groups",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/subjects/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/enrollments",
+      "expected": 400,
+      "actual": 400,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/groups/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/subjects/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/groups/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/groups",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/groups/:fixtureId",
+      "expected": 409,
+      "actual": 409,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/groups/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "route": "/api/v1/groups/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/groups/:fixtureId",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/users/:fixtureId",
+      "expected": 400,
+      "actual": 400,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/users/:fixtureId",
+      "expected": 400,
+      "actual": 400,
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "route": "/api/v1/users/:fixtureId",
+      "expected": 409,
+      "actual": 409,
+      "passed": true
+    },
+    {
+      "method": "PATCH",
+      "route": "/api/v1/subjects/:fixtureId",
+      "expected": 400,
+      "actual": 400,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/groups",
+      "expected": 409,
+      "actual": 409,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/enrollments",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/evaluations",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/groups",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/evaluations",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/groups/:fixtureId/grade-sheet",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "route": "/api/v1/grades",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/groups/:fixtureId/grade-sheet",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/students/:fixtureId/history",
+      "expected": 404,
+      "actual": 404,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/students/:fixtureId/progress",
+      "expected": 404,
+      "actual": 404,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/students/me/available-groups",
+      "expected": 404,
+      "actual": 404,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/enrollments/:fixtureId/cancel",
+      "expected": 201,
+      "actual": 201,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/periods/:fixtureId/close-check",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/periods/:fixtureId/close",
+      "expected": 409,
+      "actual": 409,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/periods/:fixtureId/close?cancelPending=true",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "method": "DELETE",
+      "route": "/api/v1/evaluations/:fixtureId",
+      "expected": 400,
+      "actual": 400,
+      "passed": true
+    }
+  ]
+}
