@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { HydratedDocument, Schema as MongooseSchema, Types } from 'mongoose';
 import { Program } from '../../programs/schemas/program.schema';
 
 export type SubjectDocument = HydratedDocument<Subject>;
@@ -15,13 +15,13 @@ export class Subject {
   @Prop({ required: true, min: 1, max: 10 })
   credits!: number;
 
-  @Prop({ type: Types.ObjectId, ref: Program.name, required: true, index: true })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Program.name, required: true, index: true })
   program!: Types.ObjectId;
 
   @Prop({ min: 1, max: 12 })
   semester?: number;
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Subject' }], default: [] })
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Subject' }], default: [] })
   prerequisites!: Types.ObjectId[];
 
   @Prop({ default: true })

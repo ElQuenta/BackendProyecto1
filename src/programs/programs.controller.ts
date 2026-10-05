@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { Paginated, PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Paginated } from '../common/dto/pagination-query.dto';
 import { Role } from '../common/enums/role.enum';
 import { ParseObjectIdPipe } from '../common/pipes/parse-object-id.pipe';
-import { CreateProgramDto, UpdateProgramDto } from './dto/program.dto';
+import { CreateProgramDto, ProgramsQueryDto, UpdateProgramDto } from './dto/program.dto';
 import { ProgramsService } from './programs.service';
 import { Program } from './schemas/program.schema';
 
@@ -14,22 +14,26 @@ import { Program } from './schemas/program.schema';
 export class ProgramsController {
   constructor(private readonly programsService: ProgramsService) {}
 
+  @ApiOperation({ summary: 'Crear un programa' })
   @Roles(Role.Admin)
   @Post()
   create(@Body() dto: CreateProgramDto): Promise<Program> {
     return this.programsService.create(dto);
   }
 
+  @ApiOperation({ summary: 'Listar programas (filtros: q, faculty, active)' })
   @Get()
-  findAll(@Query() query: PaginationQueryDto): Promise<Paginated<Program>> {
+  findAll(@Query() query: ProgramsQueryDto): Promise<Paginated<Program>> {
     return this.programsService.findAll(query);
   }
 
+  @ApiOperation({ summary: 'Ver un programa por ID' })
   @Get(':id')
   findOne(@Param('id', ParseObjectIdPipe) id: string): Promise<Program> {
     return this.programsService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Editar un programa' })
   @Roles(Role.Admin)
   @Patch(':id')
   update(

@@ -21,6 +21,10 @@ export class User {
 
   @Prop({ default: true })
   active!: boolean;
+
+  // Cuando cambia la clave, los tokens emitidos antes de esta fecha dejan de ser validos
+  @Prop()
+  passwordChangedAt?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -1,5 +1,8 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
-import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsBoolean, IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
+import { toBoolean } from '../../common/dto/query-helpers';
 import { PeriodStatus } from '../schemas/period.schema';
 
 export class CreatePeriodDto {
@@ -19,6 +22,21 @@ export class CreatePeriodDto {
 
 export class UpdatePeriodDto extends PartialType(CreatePeriodDto) {
   @ApiPropertyOptional({ enum: PeriodStatus })
+  @IsOptional()
+  @IsEnum(PeriodStatus)
+  status?: PeriodStatus;
+}
+
+export class ClosePeriodQueryDto {
+  @ApiPropertyOptional({ description: 'true = cancela las matriculas activas sin finalizar y cierra igual' })
+  @IsOptional()
+  @Transform(toBoolean)
+  @IsBoolean()
+  cancelPending?: boolean;
+}
+
+export class PeriodsQueryDto extends PaginationQueryDto {
+  @ApiPropertyOptional({ enum: PeriodStatus, description: 'Filtrar por estado' })
   @IsOptional()
   @IsEnum(PeriodStatus)
   status?: PeriodStatus;

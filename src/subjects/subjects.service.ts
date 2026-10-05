@@ -1,7 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { FilterQuery, Model } from 'mongoose';
+import { FilterQuery, Model, Types } from 'mongoose';
 import { Paginated, paginate } from '../common/dto/pagination-query.dto';
+import { textPattern } from '../common/dto/query-helpers';
 import { ProgramsService } from '../programs/programs.service';
 import { CreateSubjectDto, SubjectsQueryDto, UpdateSubjectDto } from './dto/subject.dto';
 import { Subject, SubjectDocument } from './schemas/subject.schema';
@@ -20,7 +21,14 @@ export class SubjectsService {
   }
 
   async findAll(query: SubjectsQueryDto): Promise<Paginated<Subject>> {
-    const filter: FilterQuery<SubjectDocument> = query.program ? { program: query.program } : {};
+    const filter: FilterQuery<SubjectDocument> = {};
+    if (query.program) filter.program = query.program;
+    if (query.semester) filter.semester = query.semester;
+    if (query.active !== undefined) filter.active = query.active;
+    if (query.q) {
+      const pattern = textPattern(query.q);
+      filter.$or = [{ code: pattern }, { name: pattern }];
+    }
     const [data, total] = await Promise.all([
       this.model
         .find(filter)
@@ -52,6 +60,16 @@ export class SubjectsService {
       .exec();
     if (!subject) throw new NotFoundException('Materia no encontrada');
     return subject;
+  }
+
+  // Suma los creditos de un conjunto de materias (para el limite de creditos por periodo)
+  async totalCredits(ids: Types.ObjectId[]): Promise<number> {
+    if (ids.length === 0) return 0;
+    const [result] = await this.model.aggregate<{ total: number }>([
+      { $match: { _id: { $in: ids } } },
+      { $group: { _id: null, total: { $sum: '$credits' } } },
+    ]);
+    return result?.total ?? 0;
   }
 
   private async assertPrerequisitesExist(ids: string[]): Promise<void> {

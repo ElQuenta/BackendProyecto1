@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Schema as MongooseSchema, Types } from 'mongoose';
 
 export type ProgramDocument = HydratedDocument<Program>;
 
@@ -13,6 +13,10 @@ export class Program {
 
   @Prop({ required: true, min: 1 })
   totalCredits!: number;
+
+  // Facultad a la que pertenece el programa (opcional)
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Faculty', index: true })
+  faculty?: Types.ObjectId;
 
   @Prop({ default: true })
   active!: boolean;

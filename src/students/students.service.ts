@@ -1,11 +1,12 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Paginated, PaginationQueryDto, paginate } from '../common/dto/pagination-query.dto';
+import { FilterQuery, Model } from 'mongoose';
+import { Paginated, paginate } from '../common/dto/pagination-query.dto';
+import { textPattern } from '../common/dto/query-helpers';
 import { Role } from '../common/enums/role.enum';
 import { ProgramsService } from '../programs/programs.service';
 import { UsersService } from '../users/users.service';
-import { CreateStudentDto, UpdateStudentDto } from './dto/student.dto';
+import { CreateStudentDto, StudentsQueryDto, UpdateStudentDto } from './dto/student.dto';
 import { Student, StudentDocument } from './schemas/student.schema';
 
 @Injectable()
@@ -26,17 +27,26 @@ export class StudentsService {
     return this.model.create(dto);
   }
 
-  async findAll(query: PaginationQueryDto): Promise<Paginated<Student>> {
+  async findAll(query: StudentsQueryDto): Promise<Paginated<Student>> {
+    const filter: FilterQuery<StudentDocument> = {};
+    if (query.program) filter.program = query.program;
+    if (query.active !== undefined) filter.active = query.active;
+    if (query.q) {
+      // El nombre y el correo viven en 'users': se buscan ahi y se cruzan por el ID del usuario
+      const userIds = await this.usersService.findIdsByText(query.q, Role.Estudiante);
+      filter.$or = [{ code: textPattern(query.q) }, { user: { $in: userIds } }];
+    }
+
     const [data, total] = await Promise.all([
       this.model
-        .find()
+        .find(filter)
         .populate('user', 'name email')
         .populate('program', 'code name')
         .sort({ code: 1 })
         .skip(query.skip)
         .limit(query.limit)
         .exec(),
-      this.model.countDocuments().exec(),
+      this.model.countDocuments(filter).exec(),
     ]);
     return paginate(data, total, query);
   }

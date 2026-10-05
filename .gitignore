@@ -20,6 +20,11 @@ npm-debug.log*
 
 # Material del docente: coleccion de Postman con tests (solo la Simple se comparte)
 postman/proyecto1-completa.postman_collection.json
+# Material del docente: lista de bugs del ejercicio
+bugs.md
+bugs.pdf
+# Material del docente: guias y documentacion interna
+docs/
 
 # Editores y sistema operativo
 .idea/

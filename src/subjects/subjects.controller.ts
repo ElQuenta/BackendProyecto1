@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Paginated } from '../common/dto/pagination-query.dto';
 import { Role } from '../common/enums/role.enum';
@@ -14,22 +14,26 @@ import { SubjectsService } from './subjects.service';
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 
+  @ApiOperation({ summary: 'Crear una materia' })
   @Roles(Role.Admin)
   @Post()
   create(@Body() dto: CreateSubjectDto): Promise<Subject> {
     return this.subjectsService.create(dto);
   }
 
+  @ApiOperation({ summary: 'Listar materias (filtros: q, program, semester, active)' })
   @Get()
   findAll(@Query() query: SubjectsQueryDto): Promise<Paginated<Subject>> {
     return this.subjectsService.findAll(query);
   }
 
+  @ApiOperation({ summary: 'Ver una materia por ID' })
   @Get(':id')
   findOne(@Param('id', ParseObjectIdPipe) id: string): Promise<Subject> {
     return this.subjectsService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Editar una materia' })
   @Roles(Role.Admin)
   @Patch(':id')
   update(
