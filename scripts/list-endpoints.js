@@ -31,7 +31,7 @@ for (const file of files) {
       const method = Reflect.getMetadata('method', fn);
       if (method === undefined) continue;
 
-      const route = ['api', base, Reflect.getMetadata('path', fn)].join('/').replace(/\/+/g, '/').replace(/\/$/, '');
+      const route = ['api/v1', base, Reflect.getMetadata('path', fn)].join('/').replace(/\/+/g, '/').replace(/\/$/, '');
       const roles = Reflect.getMetadata('roles', fn) || classRoles;
       const access = Reflect.getMetadata('isPublic', fn)
         ? 'Publico (sin token)'
@@ -55,10 +55,10 @@ out.push('# Lista de endpoints');
 out.push('');
 out.push(`Generado automaticamente con \`npm run docs:endpoints\` (${rows.length} endpoints). No se edita a mano.`);
 out.push('');
-out.push('- Base: `http://localhost:3000` (todas las rutas empiezan con `/api`).');
-out.push('- Autenticacion: `Authorization: Bearer <token>` (se obtiene en `POST /api/auth/login`).');
+out.push('- Base: `http://localhost:3000` (puerto PORT; rutas con `/api/v1`).');
+out.push('- Autenticacion: `Authorization: Bearer <token>` (se obtiene en `POST /api/v1/auth/login`).');
 out.push('- La columna **Quien** indica los roles permitidos: `admin`, `docente`, `estudiante`.');
-out.push('- Las rutas con `:id` esperan un ID de MongoDB de 24 caracteres. Documentacion interactiva: `/api/docs`.');
+out.push('- Las rutas con `:id` esperan un ID de MongoDB de 24 caracteres. Documentacion interactiva: `/api/doc`.');
 out.push('');
 out.push('| Modulo | Endpoints |');
 out.push('|---|---:|');
@@ -75,5 +75,6 @@ for (const [tag, list] of byTag) {
 }
 
 const target = path.join(__dirname, '..', 'docs', 'endpoints.md');
+fs.mkdirSync(path.dirname(target), { recursive: true });
 fs.writeFileSync(target, out.join('\n'));
 console.log(`docs/endpoints.md generado: ${rows.length} endpoints en ${byTag.size} modulos`);

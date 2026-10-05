@@ -1,0 +1,1079 @@
+{
+  "info": {
+    "_postman_id": "dedaf5f5-b26d-498f-b310-6dfa5825750d",
+    "name": "Proyecto1 - Simple",
+    "description": "Todos los endpoints. Cada Crear/Actualizar trae un body de ejemplo; reemplaza los textos PEGA_AQUI_... por IDs reales. Pon el Bearer token en la pestana Authorization de la coleccion y el ID en la Path Variable de cada request.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-05T16:42:25.000Z",
+    "updatedAt": "2026-10-05T16:42:26.000Z",
+    "lastUpdatedBy": "37710633",
+    "uid": "37710633-dedaf5f5-b26d-498f-b310-6dfa5825750d"
+  },
+  "item": [
+    {
+      "name": "health",
+      "item": [
+        {
+          "name": "Health",
+          "id": "a0a0560c-a615-44e8-a655-a219eee06b24",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-a0a0560c-a615-44e8-a655-a219eee06b24"
+        }
+      ],
+      "id": "a32f1990-9aa1-47f4-a0a1-c4674d075a24",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-a32f1990-9aa1-47f4-a0a1-c4674d075a24"
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "Login",
+          "id": "8e853bdc-4f3f-490f-b77f-fcce5dcad936",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-8e853bdc-4f3f-490f-b77f-fcce5dcad936"
+        },
+        {
+          "name": "Me",
+          "id": "7886c12b-c6b2-4b57-9dcf-a70d17ae24f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-7886c12b-c6b2-4b57-9dcf-a70d17ae24f1"
+        }
+      ],
+      "id": "bbc73a73-9ea3-44ee-b2a7-6966d4fca28e",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-bbc73a73-9ea3-44ee-b2a7-6966d4fca28e"
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "Listar",
+          "id": "3f855e70-1e2a-47b9-9960-dda952b67e23",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-3f855e70-1e2a-47b9-9960-dda952b67e23"
+        },
+        {
+          "name": "Crear",
+          "id": "07197e44-cc78-4261-9bef-71bbb46abfef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Maria Lopez\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"role\": \"estudiante\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-07197e44-cc78-4261-9bef-71bbb46abfef"
+        }
+      ],
+      "id": "ea9f2be5-4f3c-48eb-bc0f-ffc1df2fc349",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-ea9f2be5-4f3c-48eb-bc0f-ffc1df2fc349"
+    },
+    {
+      "name": "programs",
+      "item": [
+        {
+          "name": "Crear",
+          "id": "70d4ec6b-4a5b-40be-83fa-045e08468d3e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"ISIS\",\n  \"name\": \"Ingenieria de Sistemas\",\n  \"totalCredits\": 160\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/programs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "programs"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-70d4ec6b-4a5b-40be-83fa-045e08468d3e"
+        },
+        {
+          "name": "Listar",
+          "id": "f2673391-51dc-4535-bf25-645abc3610b6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/programs?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "programs"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-f2673391-51dc-4535-bf25-645abc3610b6"
+        },
+        {
+          "name": "Obtener",
+          "id": "53c8a2ce-e9e8-497a-b6de-61d11fd9db03",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/programs/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "programs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "7846bc74-653b-45a6-b491-d8398aaebcfd",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-53c8a2ce-e9e8-497a-b6de-61d11fd9db03"
+        },
+        {
+          "name": "Actualizar",
+          "id": "5d8e505b-62fe-4a2d-8d78-f1626a877d7e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ingenieria de Sistemas y Computacion\",\n  \"totalCredits\": 165,\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/programs/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "programs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "819055e1-f891-4995-869b-f7e24f6b9ad0",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-5d8e505b-62fe-4a2d-8d78-f1626a877d7e"
+        }
+      ],
+      "id": "76cbe612-e49a-409d-8a24-a5f23434a6f1",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-76cbe612-e49a-409d-8a24-a5f23434a6f1"
+    },
+    {
+      "name": "subjects",
+      "item": [
+        {
+          "name": "Crear",
+          "id": "02abf52e-1981-41a5-a0e3-a5f94ea3c2d0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"MAT201\",\n  \"name\": \"Calculo 2\",\n  \"credits\": 4,\n  \"program\": \"PEGA_AQUI_EL_ID_DEL_PROGRAMA\",\n  \"semester\": 2,\n  \"prerequisites\": [\n    \"PEGA_AQUI_EL_ID_DE_LA_MATERIA_PRERREQUISITO\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-02abf52e-1981-41a5-a0e3-a5f94ea3c2d0"
+        },
+        {
+          "name": "Listar",
+          "id": "50af7598-4cd6-4ca2-a87f-086028ddd22d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-50af7598-4cd6-4ca2-a87f-086028ddd22d"
+        },
+        {
+          "name": "Obtener",
+          "id": "8e6daaff-36b0-4aa8-a27b-655b460c8edd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "34ab70bb-7ea0-4801-97dd-6de996b418a7",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-8e6daaff-36b0-4aa8-a27b-655b460c8edd"
+        },
+        {
+          "name": "Actualizar",
+          "id": "7439330b-dc3e-4ea6-9634-e21193fcee26",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Calculo Diferencial\",\n  \"credits\": 4,\n  \"semester\": 1,\n  \"prerequisites\": [],\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "acdfe8ae-98b5-442e-93fe-ac275b528dfd",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-7439330b-dc3e-4ea6-9634-e21193fcee26"
+        }
+      ],
+      "id": "4d92cedd-6271-40dc-b8c2-10ab150ca130",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-4d92cedd-6271-40dc-b8c2-10ab150ca130"
+    },
+    {
+      "name": "periods",
+      "item": [
+        {
+          "name": "Crear",
+          "id": "3e4613c9-c711-4847-900d-35f7be011abd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"2026-2\",\n  \"startDate\": \"2026-08-01\",\n  \"endDate\": \"2026-12-15\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/periods",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "periods"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-3e4613c9-c711-4847-900d-35f7be011abd"
+        },
+        {
+          "name": "Listar",
+          "id": "17490327-399b-4297-a63b-eefacbb7a78a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/periods?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "periods"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-17490327-399b-4297-a63b-eefacbb7a78a"
+        },
+        {
+          "name": "Obtener",
+          "id": "22ba0f3a-c3c5-4f61-b328-56af0c7464a5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/periods/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "periods",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "0196602c-07d5-4ff6-bf02-713d11860512",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-22ba0f3a-c3c5-4f61-b328-56af0c7464a5"
+        },
+        {
+          "name": "Actualizar",
+          "id": "387a2cb9-2199-4792-8371-cc4daacbc2a4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"abierto\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/periods/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "periods",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "8a4e3c16-2760-4066-94f9-d08a0a961593",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-387a2cb9-2199-4792-8371-cc4daacbc2a4"
+        }
+      ],
+      "id": "b8b04ba6-430a-43ec-8e8b-18415cb389f7",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-b8b04ba6-430a-43ec-8e8b-18415cb389f7"
+    },
+    {
+      "name": "students",
+      "item": [
+        {
+          "name": "Crear",
+          "id": "52dcfd07-0e2d-4a7a-a66c-aaf44c1a542e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": \"PEGA_AQUI_EL_ID_DEL_USUARIO_ESTUDIANTE\",\n  \"code\": \"2026001\",\n  \"program\": \"PEGA_AQUI_EL_ID_DEL_PROGRAMA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-52dcfd07-0e2d-4a7a-a66c-aaf44c1a542e"
+        },
+        {
+          "name": "Listar",
+          "id": "b006efbe-812a-43c5-a836-2e95fff0d1eb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-b006efbe-812a-43c5-a836-2e95fff0d1eb"
+        },
+        {
+          "name": "Mi perfil",
+          "id": "704de8b9-0ae3-46f5-8445-7a33a54795ea",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "me"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-704de8b9-0ae3-46f5-8445-7a33a54795ea"
+        },
+        {
+          "name": "Obtener",
+          "id": "2511bc61-4a11-4a7f-a53a-d807e45600a5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "caec7930-ec4e-4fdf-ac01-2ec31e2e98e5",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-2511bc61-4a11-4a7f-a53a-d807e45600a5"
+        },
+        {
+          "name": "Actualizar",
+          "id": "90acce29-2ae9-4979-b52c-fba43384adcc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"2026001\",\n  \"program\": \"PEGA_AQUI_EL_ID_DEL_PROGRAMA\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "a21aa2d6-7ff8-4a73-b84d-8b8de34780a5",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-90acce29-2ae9-4979-b52c-fba43384adcc"
+        }
+      ],
+      "id": "a5f13ad1-7ec9-42fa-ab1e-c06aa6efbb0a",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-a5f13ad1-7ec9-42fa-ab1e-c06aa6efbb0a"
+    },
+    {
+      "name": "teachers",
+      "item": [
+        {
+          "name": "Crear",
+          "id": "2ac6bdca-e149-493d-9292-59d2a6acf4c0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": \"PEGA_AQUI_EL_ID_DEL_USUARIO_DOCENTE\",\n  \"code\": \"DOC-001\",\n  \"department\": \"Ingenieria\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/teachers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teachers"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-2ac6bdca-e149-493d-9292-59d2a6acf4c0"
+        },
+        {
+          "name": "Listar",
+          "id": "7bfe1552-38d7-4a01-92b1-516260db1d33",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teachers?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teachers"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-7bfe1552-38d7-4a01-92b1-516260db1d33"
+        },
+        {
+          "name": "Mi perfil",
+          "id": "3249045e-8405-4120-9dca-400b9d1492ec",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teachers/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teachers",
+                "me"
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-3249045e-8405-4120-9dca-400b9d1492ec"
+        },
+        {
+          "name": "Obtener",
+          "id": "c6c6aea0-e14e-47e6-b7db-e66bf338d818",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/teachers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teachers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "279dc0fa-09c7-4515-8d20-3e01c39c3568",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-c6c6aea0-e14e-47e6-b7db-e66bf338d818"
+        },
+        {
+          "name": "Actualizar",
+          "id": "2a1213d6-dd35-4573-ada4-cea42533c1ed",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"DOC-001\",\n  \"department\": \"Matematicas\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/teachers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "teachers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "id": "ee8b20d5-f484-47bb-a39c-538ed5515430",
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T16:42:26.000Z",
+          "updatedAt": "2026-10-05T16:42:26.000Z",
+          "uid": "37710633-2a1213d6-dd35-4573-ada4-cea42533c1ed"
+        }
+      ],
+      "id": "38c44881-9409-4ef5-8cea-0ce1df4feaca",
+      "createdAt": "2026-10-05T16:42:26.000Z",
+      "updatedAt": "2026-10-05T16:42:26.000Z",
+      "uid": "37710633-38c44881-9409-4ef5-8cea-0ce1df4feaca"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}

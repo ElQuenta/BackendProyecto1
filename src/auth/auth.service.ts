@@ -38,7 +38,10 @@ export class AuthService {
   }
 
   private async issueToken(user: UserDocument): Promise<{ accessToken: string }> {
-    const payload: JwtPayload = { sub: user.id, email: user.email, role: user.role };
+    const payload: JwtPayload = {
+      sub: user.id, email: user.email, role: user.role,
+      ...(user.passwordChangedAt ? { passwordChangedAt: user.passwordChangedAt.getTime() } : {}),
+    };
     return { accessToken: await this.jwtService.signAsync(payload) };
   }
 }

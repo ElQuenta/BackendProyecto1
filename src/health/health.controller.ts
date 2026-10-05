@@ -14,7 +14,10 @@ export class HealthController {
   @Get()
   async getHealth(): Promise<{ status: string; database: string; timestamp: string }> {
     try {
-      await this.connection.db?.admin().ping();
+      if (this.connection.readyState !== 1 || !this.connection.db) {
+        throw new ServiceUnavailableException('MongoDB no responde');
+      }
+      await this.connection.db.admin().ping();
     } catch {
       throw new ServiceUnavailableException('MongoDB no responde');
     }

@@ -1,0 +1,1216 @@
+{
+  "runner": "Newman 6.2.2",
+  "requests": {
+    "total": 60,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 180,
+    "pending": 0,
+    "failed": 0
+  },
+  "failures": [],
+  "cases": [
+    {
+      "name": "Health",
+      "method": "GET",
+      "route": "/api/v1/health",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Me",
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar",
+      "method": "GET",
+      "route": "/api/v1/users",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mi perfil de usuario",
+      "method": "GET",
+      "route": "/api/v1/users/me",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Ver un usuario por ID",
+      "method": "GET",
+      "route": "/api/v1/users/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar",
+      "method": "GET",
+      "route": "/api/v1/programs",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Obtener",
+      "method": "GET",
+      "route": "/api/v1/programs/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar",
+      "method": "GET",
+      "route": "/api/v1/subjects",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Obtener",
+      "method": "GET",
+      "route": "/api/v1/subjects/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar",
+      "method": "GET",
+      "route": "/api/v1/periods",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Obtener",
+      "method": "GET",
+      "route": "/api/v1/periods/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Periodo abierto actual",
+      "method": "GET",
+      "route": "/api/v1/periods/current",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Revision previa al cierre: matriculas activas pendientes por grupo",
+      "method": "GET",
+      "route": "/api/v1/periods/:fixtureId/close-check",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar",
+      "method": "GET",
+      "route": "/api/v1/students",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mi perfil",
+      "method": "GET",
+      "route": "/api/v1/students/me",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Obtener",
+      "method": "GET",
+      "route": "/api/v1/students/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar",
+      "method": "GET",
+      "route": "/api/v1/teachers",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mi perfil",
+      "method": "GET",
+      "route": "/api/v1/teachers/me",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Obtener",
+      "method": "GET",
+      "route": "/api/v1/teachers/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Lista de estudiantes matriculados en un grupo",
+      "method": "GET",
+      "route": "/api/v1/groups/:fixtureId/roster",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Planilla de notas del grupo: evaluaciones x estudiantes, con promedio parcial",
+      "method": "GET",
+      "route": "/api/v1/groups/:fixtureId/grade-sheet",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mi horario semanal en un periodo (por defecto el abierto)",
+      "method": "GET",
+      "route": "/api/v1/students/me/schedule",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Grupos del periodo abierto que puedo matricular (cupo, prerrequisitos y materia pendiente)",
+      "method": "GET",
+      "route": "/api/v1/students/me/available-groups",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mi malla curricular: que aprobe, que cursa y que puedo matricular",
+      "method": "GET",
+      "route": "/api/v1/students/me/progress",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Malla curricular y avance de un estudiante",
+      "method": "GET",
+      "route": "/api/v1/students/:fixtureId/progress",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Malla curricular de un programa: materias por semestre con prerrequisitos",
+      "method": "GET",
+      "route": "/api/v1/programs/:fixtureId/curriculum",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mi historial academico: materias por periodo, promedio y avance de la carrera",
+      "method": "GET",
+      "route": "/api/v1/students/me/history",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Horario semanal de un estudiante",
+      "method": "GET",
+      "route": "/api/v1/students/:fixtureId/schedule",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Historial academico de un estudiante",
+      "method": "GET",
+      "route": "/api/v1/students/:fixtureId/history",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mi horario de clases en un periodo (por defecto el abierto)",
+      "method": "GET",
+      "route": "/api/v1/teachers/me/schedule",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Horario de clases de un docente",
+      "method": "GET",
+      "route": "/api/v1/teachers/:fixtureId/schedule",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar salones",
+      "method": "GET",
+      "route": "/api/v1/classrooms",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Ver un salon por ID",
+      "method": "GET",
+      "route": "/api/v1/classrooms/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar matriculas",
+      "method": "GET",
+      "route": "/api/v1/enrollments",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mis matriculas",
+      "method": "GET",
+      "route": "/api/v1/enrollments/mine",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Ver una matricula por ID",
+      "method": "GET",
+      "route": "/api/v1/enrollments/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar evaluaciones",
+      "method": "GET",
+      "route": "/api/v1/evaluations",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Ver una evaluacion por ID",
+      "method": "GET",
+      "route": "/api/v1/evaluations/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar facultades",
+      "method": "GET",
+      "route": "/api/v1/faculties",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Ver una facultad por ID",
+      "method": "GET",
+      "route": "/api/v1/faculties/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Consultar notas de una matricula o de una evaluacion",
+      "method": "GET",
+      "route": "/api/v1/grades",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mis notas",
+      "method": "GET",
+      "route": "/api/v1/grades/mine",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Listar grupos (filtros: period, subject, teacher, day, available, active)",
+      "method": "GET",
+      "route": "/api/v1/groups",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mis grupos (docente)",
+      "method": "GET",
+      "route": "/api/v1/groups/mine",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Ver un grupo por ID",
+      "method": "GET",
+      "route": "/api/v1/groups/:fixtureId",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mis notificaciones (con contador de no leidas)",
+      "method": "GET",
+      "route": "/api/v1/notifications/mine",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Tablero general: conteos del sistema y estado del periodo abierto",
+      "method": "GET",
+      "route": "/api/v1/reports/dashboard",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Matriculas y estudiantes por programa en un periodo",
+      "method": "GET",
+      "route": "/api/v1/reports/enrollments-by-program",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Ocupacion de los grupos (los mas llenos primero)",
+      "method": "GET",
+      "route": "/api/v1/reports/group-occupancy",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Aprobacion y promedio por materia (las de menor aprobacion primero)",
+      "method": "GET",
+      "route": "/api/v1/reports/subject-performance",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Mejores promedios del periodo (ponderados por creditos)",
+      "method": "GET",
+      "route": "/api/v1/reports/top-students",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Estudiantes con materias reprobadas en el periodo",
+      "method": "GET",
+      "route": "/api/v1/reports/at-risk-students",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Carga docente: grupos, estudiantes y creditos por docente",
+      "method": "GET",
+      "route": "/api/v1/reports/teacher-load",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Programas, docentes y estudiantes por facultad",
+      "method": "GET",
+      "route": "/api/v1/reports/faculty-summary",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Status 200",
+          "passed": true
+        },
+        {
+          "name": "Estructura del contrato",
+          "passed": true
+        },
+        {
+          "name": "Coherencia del contrato",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Sin sesión",
+      "method": "GET",
+      "route": "/api/v1/users",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "Status 401",
+          "passed": true
+        },
+        {
+          "name": "Error del contrato",
+          "passed": true
+        },
+        {
+          "name": "Mensaje y ruta",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "ID inválido",
+      "method": "GET",
+      "route": "/api/v1/users/invalid",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "Status 400",
+          "passed": true
+        },
+        {
+          "name": "Error del contrato",
+          "passed": true
+        },
+        {
+          "name": "Mensaje y ruta",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Inexistente",
+      "method": "GET",
+      "route": "/api/v1/users/:fixtureId",
+      "status": 404,
+      "assertions": [
+        {
+          "name": "Status 404",
+          "passed": true
+        },
+        {
+          "name": "Error del contrato",
+          "passed": true
+        },
+        {
+          "name": "Mensaje y ruta",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Booleano inválido",
+      "method": "GET",
+      "route": "/api/v1/notifications/mine",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "Status 400",
+          "passed": true
+        },
+        {
+          "name": "Error del contrato",
+          "passed": true
+        },
+        {
+          "name": "Mensaje y ruta",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Paginación inválida",
+      "method": "GET",
+      "route": "/api/v1/subjects",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "Status 400",
+          "passed": true
+        },
+        {
+          "name": "Error del contrato",
+          "passed": true
+        },
+        {
+          "name": "Mensaje y ruta",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Login incompleto",
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "Status 400",
+          "passed": true
+        },
+        {
+          "name": "Error del contrato",
+          "passed": true
+        },
+        {
+          "name": "Mensaje y ruta",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}
