@@ -61,6 +61,7 @@ export class EnrollmentsService {
       throw new BadRequestException('Solo se puede matricular en un periodo abierto');
     }
     const subject = await this.subjectsService.findOne(String(group.subject));
+    if (!subject.active) throw new BadRequestException('La materia esta inactiva');
 
     const cancelled = await this.assertNotDuplicated(student.id, group, subject);
     await this.assertPrerequisites(student.id, subject);
@@ -157,7 +158,7 @@ export class EnrollmentsService {
   private async resolveStudent(requested: string | undefined, user: AuthUser) {
     if (user.role === Role.Estudiante) {
       const own = await this.studentsService.findByUserId(user.id);
-      if (requested && requested !== own.id) {
+      if (requested && requested.toLowerCase() !== own.id) {
         throw new ForbiddenException('Un estudiante solo puede matricularse a si mismo');
       }
       return own;

@@ -61,6 +61,23 @@ Los modelos Mongoose y queries fueron revisados por módulo. La arquitectura obs
 | REV-031 | Medium | Database | universidad.faculties | Un dean referencia un docente inexistente. El populate no puede resolver al decano. | No aplicada: Asignar referencia correcta solo con criterio de negocio y respaldo. | Pendiente; datos históricos o infraestructura fuera de corrección automática. |
 | REV-032 | Medium | Database | universidad.students | Un program referencia un programa inexistente. Historial/progreso pueden fallar por relaciones nulas. | No aplicada: Determinar programa correcto; saneamiento autorizado, sin inferir destino. | Pendiente; datos históricos o infraestructura fuera de corrección automática. |
 
+## Escaneo adicional: lógica del backend (2026-10-05)
+
+Escaneo estático de los 99 archivos de `src`: controllers, servicios, DTOs, schemas, módulos, guards y utilidades. Se sigue entrada → validación → negocio → persistencia. Alcance solicitado: backend exclusivamente; no se repite la sincronización Postman ni se modifica infraestructura o datos de `universidad`. Estado inicial de Git limpio.
+
+Se añadieron regresiones en `test/backend-scan.test.js`. Antes de corregir: 13 fallan y una pasa (ausencia legítima de periodo); los fallos reproducen condiciones omitidas, conteos incorrectos y errores no controlados. Validación final pendiente de ejecutar.
+
+| ID | Severidad | Categoría | Ubicación | Evidencia / regla / impacto | Solución | Estado |
+|---|---|---|---|---|---|---|
+| REV-033 | Medium | API | src/enrollments/enrollments.service.ts:enroll | Solo valida grupo/estudiante activos; acepta materia desactivada, aunque availableGroups la excluye. | Rechazar materia inactiva antes de reservar cupo. | Detectado, pendiente de corrección/verificación. |
+| REV-034 | Medium | API | src/groups/groups.service.ts:update | PATCH active=true no comprueba horarios: reactivar grupo puede duplicar reservas de docente/salón. | Revalidar docente, salones y conflictos al reactivar. | Detectado, pendiente de corrección/verificación. |
+| REV-035 | Medium | API | src/deletions/deletions.service.ts:removeEvaluation | DELETE permite alterar plan de periodo cerrado, que POST/PATCH protegen. | Validar periodo antes de eliminar. | Detectado, pendiente de corrección/verificación. |
+| REV-036 | High | API | src/periods/periods.service.ts:closeCheck | Suma pendientes después de unwind; referencias inexistentes desaparecen y permiten cerrar con matrículas activas. | Contar matrículas directamente, independiente de joins descriptivos. | Detectado, pendiente de corrección/verificación. |
+| REV-037 | Medium | API | src/reports/reports.service.ts:dashboard | catch general oculta fallos de MongoDB como ausencia de periodo, devuelve resultado parcial exitoso. | Solo tolerar NotFoundException de periodo; propagar demás errores. | Detectado, pendiente de corrección/verificación. |
+| REV-038 | High | Security | src/common/pipes/parse-object-id.pipe.ts; groups.service.ts; subjects.service.ts; enrollments.service.ts | ObjectId hexadecimal admite mayúsculas; comparaciones textuales permiten evadir autoprotección de usuario, ciclos y cruces de salón. | Canonizar IDs de ruta y comparaciones de IDs en reglas. | Detectado, pendiente de corrección/verificación. |
+| REV-039 | Medium | API | src/academic/academic.service.ts:gradeSheet | evaluations.length - own.size cuenta notas ajenas al plan; marca lista sin notas requeridas o genera pendientes negativos. | Contar evaluaciones del plan sin nota. | Detectado, pendiente de corrección/verificación. |
+| REV-040 | Medium | API | src/academic/academic.service.ts:history/progress/availableGroups | populate program=null provoca TypeError/500 para referencia inexistente. | Responder 404 explícito antes de acceder al programa; no reparar datos por inferencia. | Detectado, pendiente de corrección/verificación. |
+
 ## Problemas corregidos
 
 | IDs | Cambio / comprobación |
