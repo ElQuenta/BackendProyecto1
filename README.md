@@ -14,7 +14,7 @@ cp .env.example .env   # variables de entorno
 npm install
 npm run db:up          # levanta MongoDB con Docker
 npm run db:import      # carga los datos de prueba (database/*.json)
-npm run start          # API en http://localhost:3000/api
+npm run start          # API en http://localhost:3000/api/v1 (puerto PORT)
 ```
 
 Luego levanta el frontend (`proyectoFrontend1`), que corre en http://localhost:3001.
@@ -23,8 +23,8 @@ Luego levanta el frontend (`proyectoFrontend1`), que corre en http://localhost:3
 
 | Qué | URL |
 |---|---|
-| API | http://localhost:3000/api |
-| Documentación Swagger | http://localhost:3000/api/docs |
+| API | http://localhost:3000/api/v1 |
+| Documentación Swagger | http://localhost:3000/api/doc |
 | Frontend | http://localhost:3001 |
 
 ## Usuarios de prueba
@@ -39,7 +39,7 @@ Todos con la clave `Secret123!`:
 
 ## Documentación y pruebas
 
-- Swagger: http://localhost:3000/api/docs
+- Swagger: http://localhost:3000/api/doc
 - `postman/proyecto1-simple.postman_collection.json`: colección de Postman.
 
 ## Actividad

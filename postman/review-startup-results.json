@@ -1,0 +1,8 @@
+{
+  "runner": "node dist/main.js, proceso propio aislado",
+  "configuredPortRespected": true,
+  "healthStatus": "ok",
+  "database": "up",
+  "swaggerStatus": 200,
+  "endpoints": 100
+}

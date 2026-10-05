@@ -1,43 +1,67 @@
 {
   "info": {
+    "_postman_id": "e50c8a3c-5078-4406-8ef4-33ac92982d96",
     "name": "Proyecto1 - Simple",
-    "description": "Todos los endpoints. Cada Crear/Actualizar trae un body de ejemplo; reemplaza los textos PEGA_AQUI_... por IDs reales. Pon el Bearer token en la pestana Authorization de la coleccion y el ID en la Path Variable de cada request.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "description": "API proyecto1-api. 100 endpoints registrados y 6 escenarios negativos. Prefijo /api/v1; Swagger /api/doc. Configure baseUrl, token e IDs de fixtures. Contraseñas y tokens permanecen vacíos; use un entorno local privado. No ejecute CRUD en bloque sobre universidad.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-05T17:04:50.000Z",
+    "updatedAt": "2026-10-05T17:04:51.000Z",
+    "lastUpdatedBy": "37710633",
+    "uid": "37710633-e50c8a3c-5078-4406-8ef4-33ac92982d96"
   },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:3000"
-    }
-  ],
   "item": [
     {
       "name": "health",
       "item": [
         {
           "name": "Health",
+          "id": "f42d2f4b-6962-44cf-aa1d-5070648adf8c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/health",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "health"
-              ]
+            "url": "{{baseUrl}}/api/v1/health",
+            "description": "Estado de la API y de la conexion con MongoDB. Fuente: src/health/health.controller.ts. Roles: público. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "noauth"
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-f42d2f4b-6962-44cf-aa1d-5070648adf8c",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b).to.include({status:\"ok\",database:\"up\"});});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(Number.isNaN(Date.parse(b.timestamp))).to.eql(false);});"
+                ]
+              }
+            }
+          ]
         }
-      ]
+      ],
+      "id": "4eb3fd30-09aa-4321-9f8b-e63ee4acaed9",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-4eb3fd30-09aa-4321-9f8b-e63ee4acaed9"
     },
     {
       "name": "auth",
       "item": [
         {
           "name": "Login",
+          "id": "209aa1b5-ae88-437a-9a9e-fb76f8129ea3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "POST",
             "header": [
@@ -46,80 +70,185 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/auth/login",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "auth",
-                "login"
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"admin@universidad.edu\",\n    \"password\": \"Secret123!\"\n}",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/v1/auth/login",
+            "description": "Iniciar sesion: devuelve el token JWT. Fuente: src/auth/auth.controller.ts. Roles: público. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-209aa1b5-ae88-437a-9a9e-fb76f8129ea3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.accessToken).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.accessToken.split(\".\")).to.have.lengthOf(3);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Me",
+          "id": "6e6d7b39-b189-475a-8b42-88f4b08de89f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/auth/me",
+            "description": "Datos de la sesion actual. Fuente: src/auth/auth.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-6e6d7b39-b189-475a-8b42-88f4b08de89f",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.id).to.be.a(\"string\"); pm.expect(b.email).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.role).to.be.oneOf([\"admin\",\"docente\",\"estudiante\"]);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cambiar mi contrasena (devuelve un token nuevo)",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/auth/change-password",
+            "description": "Cambiar mi contrasena (devuelve un token nuevo). Fuente: src/auth/auth.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"{{currentPassword}}\",\n  \"newPassword\": \"{{newPassword}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
-        },
-        {
-          "name": "Me",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/auth/me",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "auth",
-                "me"
-              ]
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.accessToken).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.accessToken.split(\".\")).to.have.lengthOf(3);});"
+                ]
+              }
             }
-          }
+          ]
         }
-      ]
+      ],
+      "id": "ede1c87a-ef57-47bc-b90d-d4e88e63a765",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-ede1c87a-ef57-47bc-b90d-d4e88e63a765"
     },
     {
       "name": "users",
       "item": [
         {
           "name": "Listar",
+          "id": "e5446f6f-d80b-481c-a821-12841ed09cda",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/users?page=1&limit=20",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "users"
-              ],
-              "query": [
+            "url": "{{baseUrl}}/api/v1/users",
+            "description": "Listar usuarios (filtros: role, active, q). Fuente: src/users/users.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-e5446f6f-d80b-481c-a821-12841ed09cda",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Crear",
+          "id": "4f20c49f-03f0-4a9b-a0dd-9fb516aa8f02",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "POST",
             "header": [
@@ -128,34 +257,272 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/users",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "users"
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Maria Lopez\",\n    \"email\": \"maria@universidad.edu\",\n    \"password\": \"Secret123!\",\n    \"role\": \"estudiante\"\n}",
+              "raw": "{\n  \"name\": \"{{fixtureName}}\",\n  \"email\": \"{{fixtureEmail}}\",\n  \"password\": \"{{password}}\",\n  \"role\": \"estudiante\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/v1/users",
+            "description": "Crear un usuario. Fuente: src/users/users.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-4f20c49f-03f0-4a9b-a0dd-9fb516aa8f02",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\"); pm.expect(b.role).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Editar mi nombre",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/users/me",
+            "description": "Editar mi nombre. Fuente: src/users/users.controller.ts. Roles: admin, docente, estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{fixtureName}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mi perfil de usuario",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/users/me",
+            "description": "Mi perfil de usuario. Fuente: src/users/users.controller.ts. Roles: admin, docente, estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ver un usuario por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/users/{{userId}}",
+            "description": "Ver un usuario por ID. Fuente: src/users/users.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Editar un usuario",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/users/{{userId}}",
+            "description": "Editar un usuario. Fuente: src/users/users.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{fixtureName}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Restablecer la contrasena de un usuario",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/users/{{userId}}/reset-password",
+            "description": "Restablecer la contrasena de un usuario. Fuente: src/users/users.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newPassword\": \"{{newPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.message).to.eql(\"Contrasena restablecida\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         }
-      ]
+      ],
+      "id": "4a611aff-6d52-4923-bf45-84a3e859c676",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-4a611aff-6d52-4923-bf45-84a3e859c676"
     },
     {
       "name": "programs",
       "item": [
         {
           "name": "Crear",
+          "id": "e68551ac-2040-43a8-80ca-202a2f8304d2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "POST",
             "header": [
@@ -164,80 +531,135 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/programs",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "programs"
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"code\": \"ISIS\",\n    \"name\": \"Ingenieria de Sistemas\",\n    \"totalCredits\": 160\n}",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\",\n  \"name\": \"{{fixtureName}}\",\n  \"totalCredits\": 20,\n  \"faculty\": \"{{facultyId}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/programs",
+            "description": "Crear un programa. Fuente: src/programs/programs.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-e68551ac-2040-43a8-80ca-202a2f8304d2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Listar",
+          "id": "76f54700-4e79-4900-a439-a481c043dea3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/programs?page=1&limit=20",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "programs"
-              ],
-              "query": [
+            "url": "{{baseUrl}}/api/v1/programs",
+            "description": "Listar programas (filtros: q, faculty, active). Fuente: src/programs/programs.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-76f54700-4e79-4900-a439-a481c043dea3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Obtener",
+          "id": "ac083108-c76d-45e4-8c26-6ee5c1408ab5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/programs/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "programs",
-                ":id"
-              ],
-              "variable": [
+            "url": "{{baseUrl}}/api/v1/programs/{{programId}}",
+            "description": "Ver un programa por ID. Fuente: src/programs/programs.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "id",
-                  "value": ""
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-ac083108-c76d-45e4-8c26-6ee5c1408ab5",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Actualizar",
+          "id": "c13f40b2-e5b8-4ff3-bc6d-4685a3592ba2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "PATCH",
             "header": [
@@ -246,41 +668,62 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/programs/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "programs",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Ingenieria de Sistemas y Computacion\",\n    \"totalCredits\": 165,\n    \"active\": true\n}",
+              "raw": "{\n  \"name\": \"{{fixtureName}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/programs/{{programId}}",
+            "description": "Editar un programa. Fuente: src/programs/programs.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-c13f40b2-e5b8-4ff3-bc6d-4685a3592ba2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         }
-      ]
+      ],
+      "id": "7f5425f8-26b2-4d67-b1b3-6f37e43eb419",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-7f5425f8-26b2-4d67-b1b3-6f37e43eb419"
     },
     {
       "name": "subjects",
       "item": [
         {
           "name": "Crear",
+          "id": "11e80ccd-248a-490e-93f4-3541f7a8a1bb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "POST",
             "header": [
@@ -289,80 +732,135 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/subjects",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "subjects"
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"code\": \"MAT201\",\n    \"name\": \"Calculo 2\",\n    \"credits\": 4,\n    \"program\": \"PEGA_AQUI_EL_ID_DEL_PROGRAMA\",\n    \"semester\": 2,\n    \"prerequisites\": [\n        \"PEGA_AQUI_EL_ID_DE_LA_MATERIA_PRERREQUISITO\"\n    ]\n}",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\",\n  \"name\": \"{{fixtureName}}\",\n  \"credits\": 3,\n  \"program\": \"{{programId}}\",\n  \"semester\": 1,\n  \"prerequisites\": []\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/subjects",
+            "description": "Crear una materia. Fuente: src/subjects/subjects.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-11e80ccd-248a-490e-93f4-3541f7a8a1bb",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Listar",
+          "id": "252ef5e7-6664-453a-a03e-f1441b83e29b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/subjects?page=1&limit=20",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "subjects"
-              ],
-              "query": [
+            "url": "{{baseUrl}}/api/v1/subjects",
+            "description": "Listar materias (filtros: q, program, semester, active). Fuente: src/subjects/subjects.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-252ef5e7-6664-453a-a03e-f1441b83e29b",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Obtener",
+          "id": "9b171601-72e1-403a-84da-d30f06a5a4fb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/subjects/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "subjects",
-                ":id"
-              ],
-              "variable": [
+            "url": "{{baseUrl}}/api/v1/subjects/{{subjectId}}",
+            "description": "Ver una materia por ID. Fuente: src/subjects/subjects.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "id",
-                  "value": ""
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-9b171601-72e1-403a-84da-d30f06a5a4fb",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Actualizar",
+          "id": "fc84ac58-9c61-4bd3-b3fc-6488161673e2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "PATCH",
             "header": [
@@ -371,41 +869,62 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/subjects/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "subjects",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Calculo Diferencial\",\n    \"credits\": 4,\n    \"semester\": 1,\n    \"prerequisites\": [],\n    \"active\": true\n}",
+              "raw": "{\n  \"name\": \"{{fixtureName}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/subjects/{{subjectId}}",
+            "description": "Editar una materia. Fuente: src/subjects/subjects.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-fc84ac58-9c61-4bd3-b3fc-6488161673e2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         }
-      ]
+      ],
+      "id": "83c0b1b5-8f0c-46fb-bc5a-1b73e09c725b",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-83c0b1b5-8f0c-46fb-bc5a-1b73e09c725b"
     },
     {
       "name": "periods",
       "item": [
         {
           "name": "Crear",
+          "id": "ff08146c-1867-41fa-8b31-b102a232dcd7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "POST",
             "header": [
@@ -414,80 +933,135 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/periods",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "periods"
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"code\": \"2026-2\",\n    \"startDate\": \"2026-08-01\",\n    \"endDate\": \"2026-12-15\"\n}",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\",\n  \"startDate\": \"2026-01-01\",\n  \"endDate\": \"2026-12-31\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/periods",
+            "description": "Crear un periodo. Fuente: src/periods/periods.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-ff08146c-1867-41fa-8b31-b102a232dcd7",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Listar",
+          "id": "569be232-39c3-4f58-9405-4fbbf8aec426",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/periods?page=1&limit=20",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "periods"
-              ],
-              "query": [
+            "url": "{{baseUrl}}/api/v1/periods",
+            "description": "Listar periodos (filtro: status). Fuente: src/periods/periods.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-569be232-39c3-4f58-9405-4fbbf8aec426",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Obtener",
+          "id": "3b940cc7-1a65-4f6a-b480-2bf275047d4a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/periods/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "periods",
-                ":id"
-              ],
-              "variable": [
+            "url": "{{baseUrl}}/api/v1/periods/{{periodId}}",
+            "description": "Ver un periodo por ID. Fuente: src/periods/periods.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "id",
-                  "value": ""
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-3b940cc7-1a65-4f6a-b480-2bf275047d4a",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Actualizar",
+          "id": "323c1d39-9059-4777-90cb-f245b42fe03f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "PATCH",
             "header": [
@@ -496,41 +1070,161 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/periods/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "periods",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"status\": \"abierto\"\n}",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/periods/{{periodId}}",
+            "description": "Editar un periodo. Fuente: src/periods/periods.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-323c1d39-9059-4777-90cb-f245b42fe03f",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Periodo abierto actual",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/periods/current",
+            "description": "Periodo abierto actual. Fuente: src/periods/periods.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Revision previa al cierre: matriculas activas pendientes por grupo",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/periods/{{periodId}}/close-check",
+            "description": "Revision previa al cierre: matriculas activas pendientes por grupo. Fuente: src/periods/periods.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.canClose).to.be.a(\"boolean\"); pm.expect(b.groups).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.pendingEnrollments).to.be.at.least(0);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cierra el periodo (abierto -> cerrado). Es irreversible",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/periods/{{periodId}}/close",
+            "description": "Cierra el periodo (abierto -> cerrado). Es irreversible. Fuente: src/periods/periods.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.closed).to.eql(true); pm.expect(b.period.status).to.eql(\"cerrado\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.cancelledPending).to.be.a(\"number\");});"
+                ]
+              }
+            }
+          ]
         }
-      ]
+      ],
+      "id": "7e315ec7-93b8-4498-8843-6fd426a26ed3",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-7e315ec7-93b8-4498-8843-6fd426a26ed3"
     },
     {
       "name": "students",
       "item": [
         {
           "name": "Crear",
+          "id": "59227aef-57c5-494c-bab4-1468f5814f7f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "POST",
             "header": [
@@ -539,98 +1233,176 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/students",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "students"
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"user\": \"PEGA_AQUI_EL_ID_DEL_USUARIO_ESTUDIANTE\",\n    \"code\": \"2026001\",\n    \"program\": \"PEGA_AQUI_EL_ID_DEL_PROGRAMA\"\n}",
+              "raw": "{\n  \"user\": \"{{userId}}\",\n  \"code\": \"{{fixtureCode}}\",\n  \"program\": \"{{programId}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/students",
+            "description": "Crear un estudiante. Fuente: src/students/students.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-59227aef-57c5-494c-bab4-1468f5814f7f",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Listar",
+          "id": "863f3532-8a9f-494c-b234-00d8abc96f46",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/students?page=1&limit=20",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "students"
-              ],
-              "query": [
+            "url": "{{baseUrl}}/api/v1/students",
+            "description": "Listar estudiantes (filtros: q, program, active). Fuente: src/students/students.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-863f3532-8a9f-494c-b234-00d8abc96f46",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Mi perfil",
+          "id": "5494397f-8e8f-44ef-b57e-2afb538c4e31",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/students/me",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "students",
-                "me"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Obtener",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/students/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "students",
-                ":id"
-              ],
-              "variable": [
+            "url": "{{baseUrl}}/api/v1/students/me",
+            "description": "Mi perfil de estudiante. Fuente: src/students/students.controller.ts. Roles: estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "id",
-                  "value": ""
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-5494397f-8e8f-44ef-b57e-2afb538c4e31",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener",
+          "id": "ea76c63e-754f-4eb2-a60f-8ae62eea5b92",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/students/{{studentId}}",
+            "description": "Ver un estudiante por ID. Fuente: src/students/students.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-ea76c63e-754f-4eb2-a60f-8ae62eea5b92",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Actualizar",
+          "id": "22a0992b-b1d6-4681-a62b-9c2332221325",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "PATCH",
             "header": [
@@ -639,41 +1411,62 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/students/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "students",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"code\": \"2026001\",\n    \"program\": \"PEGA_AQUI_EL_ID_DEL_PROGRAMA\",\n    \"active\": true\n}",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/students/{{studentId}}",
+            "description": "Editar un estudiante. Fuente: src/students/students.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-22a0992b-b1d6-4681-a62b-9c2332221325",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         }
-      ]
+      ],
+      "id": "a72d3ae7-09e0-442f-9bc0-9a84c23d0bdc",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-a72d3ae7-09e0-442f-9bc0-9a84c23d0bdc"
     },
     {
       "name": "teachers",
       "item": [
         {
           "name": "Crear",
+          "id": "6a04257c-07c5-4edb-8a2d-8379dcc52422",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "POST",
             "header": [
@@ -682,98 +1475,176 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/teachers",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teachers"
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"user\": \"PEGA_AQUI_EL_ID_DEL_USUARIO_DOCENTE\",\n    \"code\": \"DOC-001\",\n    \"department\": \"Ingenieria\"\n}",
+              "raw": "{\n  \"user\": \"{{userId}}\",\n  \"code\": \"{{fixtureCode}}\",\n  \"faculty\": \"{{facultyId}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
+            },
+            "url": "{{baseUrl}}/api/v1/teachers",
+            "description": "Crear un docente. Fuente: src/teachers/teachers.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-6a04257c-07c5-4edb-8a2d-8379dcc52422",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Listar",
+          "id": "cb00d4d4-787c-48c4-8bd4-9df56a4e8ca8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teachers?page=1&limit=20",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teachers"
-              ],
-              "query": [
+            "url": "{{baseUrl}}/api/v1/teachers",
+            "description": "Listar docentes (filtros: q, faculty, active). Fuente: src/teachers/teachers.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-cb00d4d4-787c-48c4-8bd4-9df56a4e8ca8",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Mi perfil",
+          "id": "121b9df2-a8ba-41bd-bc83-a6ecd2e898f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teachers/me",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teachers",
-                "me"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Obtener",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/teachers/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teachers",
-                ":id"
-              ],
-              "variable": [
+            "url": "{{baseUrl}}/api/v1/teachers/me",
+            "description": "Mi perfil de docente. Fuente: src/teachers/teachers.controller.ts. Roles: docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "id",
-                  "value": ""
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             }
-          }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-121b9df2-a8ba-41bd-bc83-a6ecd2e898f1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener",
+          "id": "875a360a-7fe2-42ef-832a-6f762d3261bd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/teachers/{{teacherId}}",
+            "description": "Ver un docente por ID. Fuente: src/teachers/teachers.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-875a360a-7fe2-42ef-832a-6f762d3261bd",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Actualizar",
+          "id": "7c68256b-342a-4f45-b5e2-29e54d92f7c5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "PATCH",
             "header": [
@@ -782,35 +1653,2718 @@
                 "value": "application/json"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/api/teachers/:id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "teachers",
-                ":id"
-              ],
-              "variable": [
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/v1/teachers/{{teacherId}}",
+            "description": "Editar un docente. Fuente: src/teachers/teachers.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "id",
-                  "value": ""
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "createdAt": "2026-10-05T17:04:51.000Z",
+          "updatedAt": "2026-10-05T17:04:51.000Z",
+          "uid": "37710633-7c68256b-342a-4f45-b5e2-29e54d92f7c5",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "id": "31ba3817-5553-40f0-99d0-566e59793425",
+      "createdAt": "2026-10-05T17:04:51.000Z",
+      "updatedAt": "2026-10-05T17:04:51.000Z",
+      "uid": "37710633-31ba3817-5553-40f0-99d0-566e59793425"
+    },
+    {
+      "name": "academics",
+      "item": [
+        {
+          "name": "Lista de estudiantes matriculados en un grupo",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/{{groupId}}/roster",
+            "description": "Lista de estudiantes matriculados en un grupo. Fuente: src/academic/academic.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.students).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.total).to.eql(b.students.length);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Planilla de notas del grupo: evaluaciones x estudiantes, con promedio parcial",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/{{groupId}}/grade-sheet",
+            "description": "Planilla de notas del grupo: evaluaciones x estudiantes, con promedio parcial. Fuente: src/academic/academic.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\"); pm.expect(b.evaluations).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.summary.students).to.eql(b.rows.length);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Finaliza en bloque las matriculas activas del grupo (calcula nota final y aprueba/reprueba)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/{{groupId}}/finalize",
+            "description": "Finaliza en bloque las matriculas activas del grupo (calcula nota final y aprueba/reprueba). Fuente: src/academic/academic.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.details.finalized).to.be.an(\"array\"); pm.expect(b.details.skipped).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.finalized).to.eql(b.passed+b.failed);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mi horario semanal en un periodo (por defecto el abierto)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/students/me/schedule",
+            "description": "Mi horario semanal en un periodo (por defecto el abierto). Fuente: src/academic/academic.controller.ts. Roles: estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.slots).to.be.an(\"array\"); pm.expect(b.byDay).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Grupos del periodo abierto que puedo matricular (cupo, prerrequisitos y materia pendiente)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/students/me/available-groups",
+            "description": "Grupos del periodo abierto que puedo matricular (cupo, prerrequisitos y materia pendiente). Fuente: src/academic/academic.controller.ts. Roles: estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.groups).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.total).to.eql(b.groups.length);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mi malla curricular: que aprobe, que cursa y que puedo matricular",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/students/me/progress",
+            "description": "Mi malla curricular: que aprobe, que cursa y que puedo matricular. Fuente: src/academic/academic.controller.ts. Roles: estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.subjects).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.summary.subjects).to.eql(b.subjects.length);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Malla curricular y avance de un estudiante",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/students/{{studentId}}/progress",
+            "description": "Malla curricular y avance de un estudiante. Fuente: src/academic/academic.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.subjects).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.summary.subjects).to.eql(b.subjects.length);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Malla curricular de un programa: materias por semestre con prerrequisitos",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/programs/{{programId}}/curriculum",
+            "description": "Malla curricular de un programa: materias por semestre con prerrequisitos. Fuente: src/academic/academic.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.semesters).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.subjects).to.be.a(\"number\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mi historial academico: materias por periodo, promedio y avance de la carrera",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/students/me/history",
+            "description": "Mi historial academico: materias por periodo, promedio y avance de la carrera. Fuente: src/academic/academic.controller.ts. Roles: estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.periods).to.be.an(\"array\"); pm.expect(b.summary).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.summary.creditsApproved).to.be.at.least(0);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Horario semanal de un estudiante",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/students/{{studentId}}/schedule",
+            "description": "Horario semanal de un estudiante. Fuente: src/academic/academic.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.slots).to.be.an(\"array\"); pm.expect(b.byDay).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Historial academico de un estudiante",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/students/{{studentId}}/history",
+            "description": "Historial academico de un estudiante. Fuente: src/academic/academic.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.periods).to.be.an(\"array\"); pm.expect(b.summary).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.summary.creditsApproved).to.be.at.least(0);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mi horario de clases en un periodo (por defecto el abierto)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/teachers/me/schedule",
+            "description": "Mi horario de clases en un periodo (por defecto el abierto). Fuente: src/academic/academic.controller.ts. Roles: docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.slots).to.be.an(\"array\"); pm.expect(b.byDay).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Horario de clases de un docente",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/teachers/{{teacherId}}/schedule",
+            "description": "Horario de clases de un docente. Fuente: src/academic/academic.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.slots).to.be.an(\"array\"); pm.expect(b.byDay).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "classrooms",
+      "item": [
+        {
+          "name": "Crear un salon",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/classrooms",
+            "description": "Crear un salon. Fuente: src/classrooms/classrooms.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
                 }
               ]
             },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"code\": \"DOC-001\",\n    \"department\": \"Matematicas\",\n    \"active\": true\n}",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\",\n  \"building\": \"R\",\n  \"floor\": 1,\n  \"capacity\": 30\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             }
-          }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar salones",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/classrooms",
+            "description": "Listar salones. Fuente: src/classrooms/classrooms.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ver un salon por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/classrooms/{{classroomId}}",
+            "description": "Ver un salon por ID. Fuente: src/classrooms/classrooms.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Editar un salon",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/classrooms/{{classroomId}}",
+            "description": "Editar un salon. Fuente: src/classrooms/classrooms.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"capacity\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "deletions21312",
+      "item": [
+        {
+          "name": "Elimina un grupo sin matriculas ni evaluaciones",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/groups/{{groupId}}",
+            "description": "Elimina un grupo sin matriculas ni evaluaciones. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina una evaluacion sin notas registradas",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/evaluations/{{evaluationId}}",
+            "description": "Elimina una evaluacion sin notas registradas. Fuente: src/deletions/deletions.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina una nota puesta por error (matricula activa)",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/grades/{{gradeId}}",
+            "description": "Elimina una nota puesta por error (matricula activa). Fuente: src/deletions/deletions.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina una de mis notificaciones",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/notifications/{{notificationId}}",
+            "description": "Elimina una de mis notificaciones. Fuente: src/deletions/deletions.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina un salon que no este en ningun horario",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/classrooms/{{classroomId}}",
+            "description": "Elimina un salon que no este en ningun horario. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina una facultad sin programas ni docentes",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/faculties/{{facultyId}}",
+            "description": "Elimina una facultad sin programas ni docentes. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina un programa sin materias ni estudiantes",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/programs/{{programId}}",
+            "description": "Elimina un programa sin materias ni estudiantes. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina una materia sin grupos, matriculas ni dependientes",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/subjects/{{subjectId}}",
+            "description": "Elimina una materia sin grupos, matriculas ni dependientes. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina un periodo planificado sin grupos",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/periods/{{periodId}}",
+            "description": "Elimina un periodo planificado sin grupos. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina un estudiante sin matriculas",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/students/{{studentId}}",
+            "description": "Elimina un estudiante sin matriculas. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina un docente sin grupos",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/teachers/{{teacherId}}",
+            "description": "Elimina un docente sin grupos. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Elimina un usuario sin perfil de estudiante/docente",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/users/{{userId}}",
+            "description": "Elimina un usuario sin perfil de estudiante/docente. Fuente: src/deletions/deletions.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.deleted).to.eql(true); pm.expect(b.resource).to.be.a(\"string\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.id).to.match(/^[a-f\\d]{24}$/i);});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "enrollments",
+      "item": [
+        {
+          "name": "Matricular en un grupo (valida cupo, prerrequisitos, cruces de horario y creditos)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/enrollments",
+            "description": "Matricular en un grupo (valida cupo, prerrequisitos, cruces de horario y creditos). Fuente: src/enrollments/enrollments.controller.ts. Roles: admin, estudiante. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupId\": \"{{groupId}}\",\n  \"student\": \"{{studentId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar matriculas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/enrollments",
+            "description": "Listar matriculas. Fuente: src/enrollments/enrollments.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mis matriculas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/enrollments/mine",
+            "description": "Mis matriculas. Fuente: src/enrollments/enrollments.controller.ts. Roles: estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ver una matricula por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/enrollments/{{enrollmentId}}",
+            "description": "Ver una matricula por ID. Fuente: src/enrollments/enrollments.controller.ts. Roles: admin, estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cancelar una matricula activa (libera el cupo)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/enrollments/{{enrollmentId}}/cancel",
+            "description": "Cancelar una matricula activa (libera el cupo). Fuente: src/enrollments/enrollments.controller.ts. Roles: admin, estudiante. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "evaluations",
+      "item": [
+        {
+          "name": "Crear una evaluacion",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/evaluations",
+            "description": "Crear una evaluacion. Fuente: src/evaluations/evaluations.controller.ts. Roles: admin, docente. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"group\": \"{{groupId}}\",\n  \"name\": \"{{fixtureName}}\",\n  \"weight\": 100\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar evaluaciones",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/evaluations",
+            "description": "Listar evaluaciones. Fuente: src/evaluations/evaluations.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ver una evaluacion por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/evaluations/{{evaluationId}}",
+            "description": "Ver una evaluacion por ID. Fuente: src/evaluations/evaluations.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Editar una evaluacion",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/evaluations/{{evaluationId}}",
+            "description": "Editar una evaluacion. Fuente: src/evaluations/evaluations.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{fixtureName}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "faculties",
+      "item": [
+        {
+          "name": "Crear una facultad",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/faculties",
+            "description": "Crear una facultad. Fuente: src/faculties/faculties.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"{{fixtureCode}}\",\n  \"name\": \"{{fixtureName}}\",\n  \"campus\": \"Fixture\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar facultades",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/faculties",
+            "description": "Listar facultades. Fuente: src/faculties/faculties.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ver una facultad por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/faculties/{{facultyId}}",
+            "description": "Ver una facultad por ID. Fuente: src/faculties/faculties.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Editar una facultad",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/faculties/{{facultyId}}",
+            "description": "Editar una facultad. Fuente: src/faculties/faculties.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{fixtureName}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "grades",
+      "item": [
+        {
+          "name": "Registrar o corregir una nota (idempotente)",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/grades?enrollment={{enrollmentId}}",
+            "description": "Registrar o corregir una nota (idempotente). Fuente: src/grades/grades.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enrollment\": \"{{enrollmentId}}\",\n  \"evaluation\": \"{{evaluationId}}\",\n  \"value\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Registrar varias notas a la vez (planilla); informa las que fallaron",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/grades/bulk",
+            "description": "Registrar varias notas a la vez (planilla); informa las que fallaron. Fuente: src/grades/grades.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"enrollment\": \"{{enrollmentId}}\",\n      \"evaluation\": \"{{evaluationId}}\",\n      \"value\": 3\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.failed).to.be.an(\"array\"); pm.expect(b.saved).to.be.a(\"number\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.total).to.eql(b.saved+b.failed.length);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Consultar notas de una matricula o de una evaluacion",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/grades?enrollment={{enrollmentId}}",
+            "description": "Consultar notas de una matricula o de una evaluacion. Fuente: src/grades/grades.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mis notas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/grades/mine",
+            "description": "Mis notas. Fuente: src/grades/grades.controller.ts. Roles: estudiante. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Calcular la nota final de una matricula y marcarla aprobada/reprobada",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/grades/finalize/{{enrollmentId}}",
+            "description": "Calcular la nota final de una matricula y marcarla aprobada/reprobada. Fuente: src/grades/grades.controller.ts. Roles: admin, docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.finalGrade).to.be.within(0,5);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.status).to.eql(b.finalGrade>=3?\"aprobada\":\"reprobada\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "groups",
+      "item": [
+        {
+          "name": "Crear un grupo",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups",
+            "description": "Crear un grupo. Fuente: src/groups/groups.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"{{subjectId}}\",\n  \"teacher\": \"{{teacherId}}\",\n  \"period\": \"{{periodId}}\",\n  \"capacity\": 10,\n  \"schedule\": [\n    {\n      \"day\": \"lunes\",\n      \"startTime\": \"08:00\",\n      \"endTime\": \"10:00\",\n      \"classroom\": \"{{classroomId}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Listar grupos (filtros: period, subject, teacher, day, available, active)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups",
+            "description": "Listar grupos (filtros: period, subject, teacher, day, available, active). Fuente: src/groups/groups.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mis grupos (docente)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/mine",
+            "description": "Mis grupos (docente). Fuente: src/groups/groups.controller.ts. Roles: docente. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ver un grupo por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/{{groupId}}",
+            "description": "Ver un grupo por ID. Fuente: src/groups/groups.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Editar un grupo",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/groups/{{groupId}}",
+            "description": "Editar un grupo. Fuente: src/groups/groups.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"capacity\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "item": [
+        {
+          "name": "Enviar un aviso a un usuario",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/notifications",
+            "description": "Enviar un aviso a un usuario. Fuente: src/notifications/notifications.controller.ts. Roles: admin. Éxito esperado: 201. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": \"{{userId}}\",\n  \"title\": \"Review Notice\",\n  \"message\": \"Synthetic fixture\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\",()=>pm.response.to.have.status(201));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b._id).to.match(/^[a-f\\d]{24}$/i);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b).not.to.have.property(\"passwordHash\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mis notificaciones (con contador de no leidas)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/mine",
+            "description": "Mis notificaciones (con contador de no leidas). Fuente: src/notifications/notifications.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.data).to.be.an(\"array\"); pm.expect(b.meta).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.meta.total).to.be.a(\"number\"); pm.expect(b.meta.page).to.be.at.least(1);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Marcar todas mis notificaciones como leidas",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/notifications/read-all",
+            "description": "Marcar todas mis notificaciones como leidas. Fuente: src/notifications/notifications.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.updated).to.be.a(\"number\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.updated).to.be.at.least(0);});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Marcar una notificacion como leida",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/notifications/{{notificationId}}/read",
+            "description": "Marcar una notificacion como leida. Fuente: src/notifications/notifications.controller.ts. Roles: sesión autenticada. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.read).to.eql(true);});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(Number.isNaN(Date.parse(b.readAt))).to.eql(false);});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "reports",
+      "item": [
+        {
+          "name": "Tablero general: conteos del sistema y estado del periodo abierto",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/dashboard",
+            "description": "Tablero general: conteos del sistema y estado del periodo abierto. Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.users).to.be.an(\"object\"); pm.expect(b.active).to.be.an(\"object\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.faculties).to.be.a(\"number\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Matriculas y estudiantes por programa en un periodo",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/enrollments-by-program",
+            "description": "Matriculas y estudiantes por programa en un periodo. Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ocupacion de los grupos (los mas llenos primero)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/group-occupancy",
+            "description": "Ocupacion de los grupos (los mas llenos primero). Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Aprobacion y promedio por materia (las de menor aprobacion primero)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/subject-performance",
+            "description": "Aprobacion y promedio por materia (las de menor aprobacion primero). Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mejores promedios del periodo (ponderados por creditos)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/top-students",
+            "description": "Mejores promedios del periodo (ponderados por creditos). Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Estudiantes con materias reprobadas en el periodo",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/at-risk-students",
+            "description": "Estudiantes con materias reprobadas en el periodo. Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Carga docente: grupos, estudiantes y creditos por docente",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/teacher-load",
+            "description": "Carga docente: grupos, estudiantes y creditos por docente. Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{pm.expect(b.period.id).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Programas, docentes y estudiantes por facultad",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reports/faculty-summary",
+            "description": "Programas, docentes y estudiantes por facultad. Fuente: src/reports/reports.controller.ts. Roles: admin. Éxito esperado: 200. Las operaciones mutables requieren fixtures propios en un entorno de prueba.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\",()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Estructura del contrato\",()=>{pm.expect(b.rows).to.be.an(\"array\");});",
+                  "pm.test(\"Coherencia del contrato\",()=>{b.rows.forEach(r=>pm.expect(r.faculty.id).to.be.a(\"string\"));});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Escenarios negativos",
+      "item": [
+        {
+          "name": "Sin sesión",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/users",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 401\",()=>pm.response.to.have.status(401));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Error del contrato\",()=>pm.expect(b.statusCode).to.eql(401));",
+                  "pm.test(\"Mensaje y ruta\",()=>{pm.expect(b.message).to.exist;pm.expect(b.path).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "ID inválido",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/users/invalid",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\",()=>pm.response.to.have.status(400));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Error del contrato\",()=>pm.expect(b.statusCode).to.eql(400));",
+                  "pm.test(\"Mensaje y ruta\",()=>{pm.expect(b.message).to.exist;pm.expect(b.path).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Inexistente",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/users/000000000000000000000000",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\",()=>pm.response.to.have.status(404));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Error del contrato\",()=>pm.expect(b.statusCode).to.eql(404));",
+                  "pm.test(\"Mensaje y ruta\",()=>{pm.expect(b.message).to.exist;pm.expect(b.path).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Booleano inválido",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/mine?read=invalid",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\",()=>pm.response.to.have.status(400));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Error del contrato\",()=>pm.expect(b.statusCode).to.eql(400));",
+                  "pm.test(\"Mensaje y ruta\",()=>{pm.expect(b.message).to.exist;pm.expect(b.path).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Paginación inválida",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/subjects?page=0",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\",()=>pm.response.to.have.status(400));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Error del contrato\",()=>pm.expect(b.statusCode).to.eql(400));",
+                  "pm.test(\"Mensaje y ruta\",()=>{pm.expect(b.message).to.exist;pm.expect(b.path).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login incompleto",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/auth/login",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\",()=>pm.response.to.have.status(400));",
+                  "const b=pm.response.json();",
+                  "pm.test(\"Error del contrato\",()=>pm.expect(b.statusCode).to.eql(400));",
+                  "pm.test(\"Mensaje y ruta\",()=>{pm.expect(b.message).to.exist;pm.expect(b.path).to.be.a(\"string\");});"
+                ]
+              }
+            }
+          ]
         }
       ]
     }
-  ]
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "email",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "password",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "currentPassword",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "newPassword",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "fixtureName",
+      "value": "Review Fixture",
+      "type": "string"
+    },
+    {
+      "key": "fixtureEmail",
+      "value": "review-fixture@example.invalid",
+      "type": "string"
+    },
+    {
+      "key": "fixtureCode",
+      "value": "REV-FIXTURE",
+      "type": "string"
+    },
+    {
+      "key": "facultyId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "programId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "subjectId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "teacherId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "periodId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "classroomId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "groupId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "studentId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "enrollmentId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "evaluationId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "authId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "gradeId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "notificationId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "healthId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "reportsId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  }
 }
