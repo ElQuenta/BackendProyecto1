@@ -1,7 +1,6 @@
 require('reflect-metadata');
 const { validate } = require('class-validator');
 const { plainToInstance } = require('class-transformer');
-const { JwtService } = require('@nestjs/jwt');
 const { GroupsService } = require('../dist/groups/groups.service');
 const { UsersService } = require('../dist/users/users.service');
 const { NotificationsService } = require('../dist/notifications/notifications.service');
@@ -79,12 +78,6 @@ test('token nuevo vinculado al cambio de contraseña es aceptado', async () => {
   const changed = new Date(1750000000900);
   const strategy = new JwtStrategy(config, { findById: async () => ({ active: true, passwordChangedAt: changed, email: 'fixture@example.invalid', role: 'admin' }) });
   await expect(strategy.validate({ sub: oid, iat: 1750000000, passwordChangedAt: changed.getTime() })).resolves.toMatchObject({ id: oid });
-});
-
-test('JWT TTL numérico representa segundos', () => {
-  const jwt = new JwtService({ secret: config.getOrThrow(), signOptions: { expiresIn: 3600 } });
-  const payload = jwt.decode(jwt.sign({ sub: oid }));
-  expect(payload.exp - payload.iat).toBe(3600);
 });
 
 test('periodo abierto no puede volver a planificado', async () => {

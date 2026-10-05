@@ -127,6 +127,70 @@ test('notas idempotentes, bulk, eliminación y límite aprobado 3.0', async () =
   expect((await call('POST', `/api/v1/periods/${ids.periods}/close`, 200)).closed).toBe(true);
 });
 
+test('capacidad final se reserva de forma atómica entre estudiantes distintos', async () => {
+  // This period is closed by the previous scenario: create a fresh, isolated open period.
+  const period = await call('POST', '/api/v1/periods', 201, { code: 'REV-CONCURRENCY', startDate: '2027-01-01', endDate: '2027-12-31' });
+  await call('PATCH', `/api/v1/periods/${period._id}`, 200, { status: 'abierto' });
+  const user = await call('POST', '/api/v1/users', 201, { name: 'Review Second Student', email: 'review-second@example.invalid', password: f.password, role: 'estudiante' });
+  const student = await call('POST', '/api/v1/students', 201, { user: user.id, code: 'REV-SECOND', program: ids.programs });
+  const subject = await call('POST', '/api/v1/subjects', 201, { code: 'REV-CONC', name: 'Review Concurrent', credits: 3, program: ids.programs });
+  const group = await call('POST', '/api/v1/groups', 201, { subject: subject._id, teacher: ids.teachers, period: period._id, capacity: 1, schedule: [{day:'martes',startTime:'08:00',endTime:'10:00',classroom:ids.classrooms}] });
+  const enroll = async studentId => {
+    const response = await fetch(f.baseUrl + '/api/v1/enrollments', { method: 'POST', headers: { 'Content-Type':'application/json', Authorization:`Bearer ${tokens.admin}` }, body: JSON.stringify({groupId:group._id,student:studentId}) });
+    results.push({method:'POST',route:'/api/v1/enrollments',scenario:'last seat concurrency',expected:'one 201, one 409',actual:response.status,passed:[201,409].includes(response.status)});
+    return {status:response.status,body:await response.json()};
+  };
+  const responses = await Promise.all([enroll(ids.students),enroll(student._id)]);
+  expect(responses.map(r=>r.status).sort()).toEqual([201,409]);
+  const active = responses.find(r=>r.status===201).body;
+  expect((await call('GET', `/api/v1/groups/${group._id}`, 200)).enrolled).toBe(1);
+  await call('POST', `/api/v1/enrollments/${active._id}/cancel`, 201);
+  expect((await call('GET', `/api/v1/groups/${group._id}`, 200)).enrolled).toBe(0);
+  // No active seats remain: also exercise successful finalization of a group and forced period closure.
+  const nextEnrollment = await call('POST', '/api/v1/enrollments', 201, {groupId:group._id,student:student._id});
+  const evaluation = await call('POST', '/api/v1/evaluations', 201, {group:group._id,name:'Review Concurrent Final',weight:100});
+  await call('PUT', '/api/v1/grades', 200, {enrollment:nextEnrollment._id,evaluation:evaluation._id,value:4});
+  expect((await call('POST', `/api/v1/groups/${group._id}/finalize`, 200)).finalized).toBe(1);
+  await call('POST', `/api/v1/periods/${period._id}/close`, 200);
+  await call('PATCH', `/api/v1/evaluations/${evaluation._id}`, 400, {name:'Closed cannot change'});
+});
+
+test('reglas de prerrequisitos, créditos, porcentajes y horarios se verifican antes de guardar', async () => {
+  const period = await call('POST', '/api/v1/periods', 201, {code:'REV-RULES',startDate:'2028-01-01',endDate:'2028-12-31'});
+  await call('PATCH', `/api/v1/periods/${period._id}`, 200, {status:'abierto'});
+  await call('PATCH', `/api/v1/periods/${period._id}`, 400, {status:'planificado'});
+  const base = {teacher:ids.teachers,period:period._id,capacity:10};
+  const subjects=[];
+  for(let n=0;n<3;n++)subjects.push(await call('POST','/api/v1/subjects',201,{code:`REV-CREDIT-${n}`,name:'Review Credits',credits:10,program:ids.programs}));
+  for(let n=0;n<3;n++){
+    const group=await call('POST','/api/v1/groups',201,{...base,subject:subjects[n]._id,schedule:[{day:'miercoles',startTime:`${10+n}:00`,endTime:`${11+n}:00`,classroom:ids.classrooms}]});
+    await call('POST','/api/v1/enrollments',n<2?201:400,{groupId:group._id,student:ids.students});
+  }
+  const prereq=await call('POST','/api/v1/subjects',201,{code:'REV-PREREQ',name:'Review Prerequisite',credits:1,program:ids.programs,prerequisites:[subjects[2]._id]});
+  const gated=await call('POST','/api/v1/groups',201,{...base,subject:prereq._id,schedule:[{day:'jueves',startTime:'08:00',endTime:'09:00',classroom:ids.classrooms}]});
+  await call('POST','/api/v1/enrollments',400,{groupId:gated._id,student:ids.students});
+  await call('POST','/api/v1/groups',400,{...base,subject:prereq._id,schedule:[{day:'viernes',startTime:'10:00',endTime:'09:00',classroom:ids.classrooms}]});
+  await call('POST','/api/v1/groups',409,{...base,subject:prereq._id,schedule:[{day:'jueves',startTime:'08:30',endTime:'09:30',classroom:ids.classrooms}]});
+  await call('POST','/api/v1/evaluations',201,{group:gated._id,name:'Half',weight:60});
+  await call('POST','/api/v1/evaluations',400,{group:gated._id,name:'Overflow',weight:50});
+  expect((await call('POST', `/api/v1/periods/${period._id}/close?cancelPending=true`, 200)).cancelledPending).toBe(2);
+});
+
+test('DELETE devuelve contrato de éxito para cada recurso sin dependencias', async () => {
+  const faculty=await call('POST','/api/v1/faculties',201,{code:'REV-FREE-F',name:'Review Free',campus:'Fixture'});
+  const program=await call('POST','/api/v1/programs',201,{code:'REV-FREE-P',name:'Review Free',totalCredits:10,faculty:faculty._id});
+  const subject=await call('POST','/api/v1/subjects',201,{code:'REV-FREE-S',name:'Review Free',credits:1,program:program._id});
+  const period=await call('POST','/api/v1/periods',201,{code:'REV-FREE-PER',startDate:'2029-01-01',endDate:'2029-12-31'});
+  const room=await call('POST','/api/v1/classrooms',201,{code:'REV-FREE-R',building:'R',floor:1,capacity:10});
+  const group=await call('POST','/api/v1/groups',201,{subject:subject._id,teacher:ids.teachers,period:period._id,capacity:5,schedule:[{day:'viernes',startTime:'08:00',endTime:'09:00',classroom:room._id}]});
+  const evaluation=await call('POST','/api/v1/evaluations',201,{group:group._id,name:'Review Free',weight:100});
+  const user=await call('POST','/api/v1/users',201,{name:'Review Free',email:'review-free@example.invalid',password:f.password,role:'estudiante'});
+  const student=await call('POST','/api/v1/students',201,{code:'REV-FREE-ST',user:user.id,program:program._id});
+  for(const [resource,id] of [['evaluations',evaluation._id],['groups',group._id],['students',student._id],['users',user.id],['subjects',subject._id],['programs',program._id],['faculties',faculty._id],['classrooms',room._id],['periods',period._id]]){
+    expect(await call('DELETE',`/api/v1/${resource}/${id}`,200)).toMatchObject({deleted:true,resource,id});
+  }
+});
+
 test('contraseña persiste, revoca token anterior y permite token nuevo', async () => {
   const old = tokens.estudiante;
   const next = f.password + 'Next9';
